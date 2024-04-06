@@ -18,7 +18,7 @@ class User : AbstractEntityId<Long>() {
     @Column(name = "id")
     override var id: Long? = null
 
-    @Column(name = "username")
+    @Column(name = "username", unique = true)
     lateinit var username: String
 
     @Column(name = "password")
@@ -26,7 +26,15 @@ class User : AbstractEntityId<Long>() {
 
     @Column(name = "expire_at")
     lateinit var expireAt: OffsetDateTime
+
+    @Column(name = "enabled")
     var enabled: Boolean = false
+
+    @Column(name = "email", unique = true)
+    lateinit var email: String
+
+    @Column(name = "email_confirmed")
+    var emailConfirmed: Boolean = false
 
     @ManyToMany
     @JoinTable(

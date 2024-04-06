@@ -11,6 +11,5 @@ class RegisterRequest {
     @NotNull
     lateinit var password: String
 
-    @NotNull
-    lateinit var confirmPassword: String
+
 }
