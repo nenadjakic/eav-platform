@@ -45,7 +45,7 @@ class JwtService(
      * @return An instance of Claims containing all extracted claims from the token.
      * @throws io.jsonwebtoken.JwtException if there is an error while extracting claims from the token.
      */
-    private fun extractAllClaims(token: String): Claims {
+    fun extractAllClaims(token: String): Claims {
         return Jwts
             .parser()
             .verifyWith(getSignInKey())
@@ -98,7 +98,7 @@ class JwtService(
      * @return true if the token is valid, false otherwise.
      * @throws io.jsonwebtoken.JwtException if there is an error while checking the token validity.
      */
-    private fun isValid(token: String): Boolean {
+    fun isValid(token: String): Boolean {
         try {
             Jwts.parser().verifyWith(getSignInKey()).build().parseSignedClaims(token)
             return !isTokenExpired(token)

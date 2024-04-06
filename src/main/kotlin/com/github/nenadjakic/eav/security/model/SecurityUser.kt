@@ -11,7 +11,7 @@ import java.time.OffsetDateTime
 class  SecurityUser() : UserDetails {
     private var id: Long? = null
     private val authorities: MutableCollection<GrantedAuthority> = mutableListOf()
-    private lateinit var username: String
+    lateinit var username: String
     private lateinit var password: String
     private val enabled = false
     private lateinit var expireAt: OffsetDateTime
@@ -21,6 +21,10 @@ class  SecurityUser() : UserDetails {
         username = user.username
         password = user.password
         user.roles.forEach { role -> authorities.add(SimpleGrantedAuthority(role.name)) }
+    }
+
+    fun addAuthority(authority: GrantedAuthority): Boolean {
+        return authorities.add(authority)
     }
 
     override fun getAuthorities(): MutableCollection<out GrantedAuthority> {
