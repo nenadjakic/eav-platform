@@ -21,6 +21,10 @@ class JwtService(
     @Value("\${eav-platform.security.jwt.access-token.valid-minutes}") private val accessTokenValidMinutes: Long
 ) {
 
+    fun createToken(user: SecurityUser): String {
+        return createToken(user, mutableMapOf())
+    }
+
     fun createToken(user: SecurityUser, claims: MutableMap<String, Any>): String {
         val created = Date(OffsetDateTime.now().toEpochSecond())
         val expireAt = Date(OffsetDateTime.now().toEpochSecond() + (accessTokenValidMinutes * 60))

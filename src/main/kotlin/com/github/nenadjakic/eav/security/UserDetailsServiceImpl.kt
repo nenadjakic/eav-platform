@@ -6,7 +6,9 @@ import com.github.nenadjakic.eav.service.security.UserService
 import org.springframework.security.core.userdetails.UserDetails
 import org.springframework.security.core.userdetails.UserDetailsService
 import org.springframework.security.core.userdetails.UsernameNotFoundException
+import org.springframework.stereotype.Service
 
+@Service
 class UserDetailsServiceImpl(
     private val userService: UserService
 ) : UserDetailsService {

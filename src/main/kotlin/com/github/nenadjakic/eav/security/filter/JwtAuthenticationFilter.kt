@@ -11,6 +11,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority
 import org.springframework.security.core.context.SecurityContextHolder
 import org.springframework.security.core.userdetails.UserDetails
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource
+import org.springframework.stereotype.Component
 import org.springframework.util.ObjectUtils
 import org.springframework.web.filter.OncePerRequestFilter
 
@@ -20,6 +21,7 @@ import org.springframework.web.filter.OncePerRequestFilter
  *
  * This filter is responsible for intercepting incoming HTTP requests and processing JWT authentication.
  */
+@Component
 class JwtAuthenticationFilter(private val jwtService: JwtService) : OncePerRequestFilter() {
     override fun doFilterInternal(
         request: HttpServletRequest,
@@ -27,6 +29,7 @@ class JwtAuthenticationFilter(private val jwtService: JwtService) : OncePerReque
         filterChain: FilterChain
     ) {
         if (!hasAuthorizationBearer(request)) {
+            filterChain.doFilter(request, response);
             return
         }
         val token = getAccessToken(request)
@@ -50,7 +53,7 @@ class JwtAuthenticationFilter(private val jwtService: JwtService) : OncePerReque
 
     private fun hasAuthorizationBearer(request: HttpServletRequest): Boolean {
         val header = request.getHeader("Authorization");
-        return ObjectUtils.isEmpty(header) && header.startsWith("Bearer")
+        return !ObjectUtils.isEmpty(header) && header.startsWith("Bearer")
     }
 
     private fun getAccessToken(request: HttpServletRequest): String {

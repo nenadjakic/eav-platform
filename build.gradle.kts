@@ -26,8 +26,10 @@ dependencies {
     implementation("io.jsonwebtoken:jjwt-api:0.12.5")
     implementation("io.jsonwebtoken:jjwt-impl:0.12.5")
     implementation("io.jsonwebtoken:jjwt-jackson:0.12.5")
+    implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.5.0")
 
     runtimeOnly("org.postgresql:postgresql:42.7.3")
+
     testImplementation("org.springframework.boot:spring-boot-starter-test:3.2.4")
 }
 
