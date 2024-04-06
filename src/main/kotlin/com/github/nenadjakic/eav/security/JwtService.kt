@@ -9,10 +9,12 @@ import org.springframework.beans.factory.annotation.Value
 import org.springframework.stereotype.Service
 import java.time.OffsetDateTime
 import java.util.*
-import java.util.function.Function
 import java.util.stream.Collectors
 import javax.crypto.SecretKey
 
+/**
+ * Service class for handling JWT tokens.
+ */
 @Service
 class JwtService(
     @Value("\${eav-platform.security.jwt.secret-key}") private val secretKey: String,
@@ -36,6 +38,13 @@ class JwtService(
             .compact()
     }
 
+    /**
+     * Extracts all claims from the JWT token.
+     *
+     * @param token The JWT token string.
+     * @return An instance of Claims containing all extracted claims from the token.
+     * @throws io.jsonwebtoken.JwtException if there is an error while extracting claims from the token.
+     */
     private fun extractAllClaims(token: String): Claims {
         return Jwts
             .parser()
@@ -45,21 +54,51 @@ class JwtService(
             .payload
     }
 
-    fun <T> extractClaim(token: String, claimsResolver: Function1<Claims?, T?>): T? {
+    /**
+     * Extracts a specific claim from the JWT token using the provided claims resolver function.
+     *
+     * @param token The JWT token string.
+     * @param claimsResolver The claims resolver function to extract the desired claim.
+     * @return The extracted claim value of type T, or null if the claim is not found or extraction fails.
+     * @throws io.jsonwebtoken.JwtException if there is an error while extracting the claim.
+     * @param T The type of the claim value to extract.
+     */
+    private fun <T> extractClaim(token: String, claimsResolver: Function1<Claims?, T?>): T? {
         val claims = extractAllClaims(token)
         return claimsResolver.invoke(claims)
     }
 
-    fun extractUserName(token: String): String? {
+    /**
+     * Extracts the username from the JWT token.
+     *
+     * @param token The JWT token string.
+     * @return The extracted username as a String, or null if the username is not found.
+     * @throws io.jsonwebtoken.JwtException if there is an error while extracting the username.
+     */
+    private fun extractUserName(token: String): String? {
         return extractClaim(token) { x -> x?.subject }
     }
 
-    fun isTokenExpired(token: String): Boolean {
+    /**
+     * Checks if the JWT token is expired.
+     *
+     * @param token The JWT token string.
+     * @return true if the token is expired, false otherwise.
+     * @throws io.jsonwebtoken.JwtException if there is an error while checking the token expiration.
+     */
+    private fun isTokenExpired(token: String): Boolean {
         val expireAt = extractClaim(token) { x -> x?.expiration}
         return expireAt?.before(Date()) ?: false
     }
 
-    fun isValid(token: String): Boolean {
+    /**
+     * Checks if the JWT token is valid.
+     *
+     * @param token The JWT token string.
+     * @return true if the token is valid, false otherwise.
+     * @throws io.jsonwebtoken.JwtException if there is an error while checking the token validity.
+     */
+    private fun isValid(token: String): Boolean {
         try {
             Jwts.parser().verifyWith(getSignInKey()).build().parseSignedClaims(token)
             return !isTokenExpired(token)
@@ -68,6 +107,11 @@ class JwtService(
         }
     }
 
+    /**
+     * Retrieves the signing key used for JWT token generation.
+     *
+     * @return The signing key as a SecretKey.
+     */
     private fun getSignInKey(): SecretKey {
         val keyBytes = Decoders.BASE64.decode(secretKey)
         return Keys.hmacShaKeyFor(keyBytes)
