@@ -10,12 +10,31 @@ import jakarta.persistence.ManyToOne
  * This class is used as an embedded id in the RoleAttribute entity.
  */
 @Embeddable
-class RoleAttributeId (
+class RoleAttributeId {
+
     @ManyToOne
     @JoinColumn(name = "role_id")
-    val role: Role,
+    lateinit var role: Role
 
     @ManyToOne
     @JoinColumn(name = "attribute_id")
-    val attribute: Attribute,
-)
+    lateinit var attribute: Attribute
+
+    override fun equals(other: Any?): Boolean {
+        if (this === other) return true
+        if (javaClass != other?.javaClass) return false
+
+        other as RoleAttributeId
+
+        if (role != other.role) return false
+        if (attribute != other.attribute) return false
+
+        return true
+    }
+
+    override fun hashCode(): Int {
+        var result = role.hashCode()
+        result = 31 * result + attribute.hashCode()
+        return result
+    }
+}
