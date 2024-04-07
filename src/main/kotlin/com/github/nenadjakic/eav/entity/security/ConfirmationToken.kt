@@ -30,7 +30,6 @@ class ConfirmationToken() : AbstractEntityId<Long>() {
     lateinit var expireAt: OffsetDateTime
 
     constructor(user: User) : this() {
-       // this.id = user.id
         this.user = user
         this.token = UUID.randomUUID().toString().replace("-", "")
         this.expireAt = OffsetDateTime.now().plusHours(12L)

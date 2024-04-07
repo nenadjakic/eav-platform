@@ -6,6 +6,7 @@ import com.github.nenadjakic.eav.dto.TokenResponse
 import com.github.nenadjakic.eav.entity.security.User
 import com.github.nenadjakic.eav.security.JwtService
 import com.github.nenadjakic.eav.security.model.SecurityUser
+import com.github.nenadjakic.eav.service.security.RefreshTokenService
 import com.github.nenadjakic.eav.service.security.UserService
 import jakarta.validation.Valid
 import org.modelmapper.ModelMapper
@@ -23,9 +24,11 @@ import org.springframework.web.bind.annotation.*
 
 @RestController
 @RequestMapping("/auth")
+@Validated
 open class AuthController(
     private val modelMapper: ModelMapper,
     private val userService: UserService,
+    private val refreshTokenService: RefreshTokenService,
     private val authenticationManager: AuthenticationManager,
     private val jwtService: JwtService
 ) {
@@ -82,14 +85,28 @@ open class AuthController(
      */
     @PostMapping("/signin")
     open fun signIn(
-        @RequestBody signInRequest: SignInRequest
+         @Valid @RequestBody signInRequest: SignInRequest
     ): ResponseEntity<TokenResponse> {
-        val usernamePassword = UsernamePasswordAuthenticationToken(signInRequest.username, signInRequest.password)
-        val authUser: Authentication? = authenticationManager.authenticate(usernamePassword)
-        val accessToken: String = jwtService.createToken(authUser?.principal as SecurityUser)
+        if (signInRequest.grantType == SignInRequest.GrantType.PASSWORD) {
+            val usernamePassword = UsernamePasswordAuthenticationToken(signInRequest.username, signInRequest.passwordOrRefreshToken)
+            val authUser: Authentication? = authenticationManager.authenticate(usernamePassword)
+            val accessToken: String = jwtService.createToken(authUser?.principal as SecurityUser)
+            val refreshToken = refreshTokenService.create(signInRequest.username)?.token
 
-        return ResponseEntity.ok(TokenResponse(accessToken, ""))
+            return ResponseEntity.ok(TokenResponse(accessToken, refreshToken))
+        } else if (signInRequest.grantType == SignInRequest.GrantType.REFRESHTOKEN) {
+            val refreshTokenEntity = refreshTokenService.findByUsernameAndToken(signInRequest.username, signInRequest.passwordOrRefreshToken)
+            if (refreshTokenEntity != null) {
+                val accessToken: String = jwtService.createToken(SecurityUser(refreshTokenEntity.user))
+                val refreshToken = refreshTokenService.create(signInRequest.username)?.token
+
+                return ResponseEntity.ok(TokenResponse(accessToken, refreshToken))
+            }
+        }
+        return ResponseEntity.status(HttpStatus.FORBIDDEN).build()
     }
+
+    //open fun jtwFromRefreshToken(refreshToken: String)
 
     @GetMapping("/test")
     open fun ff(): String {

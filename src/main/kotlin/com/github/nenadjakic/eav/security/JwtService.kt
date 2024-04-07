@@ -16,16 +16,16 @@ import javax.crypto.SecretKey
  * Service class for handling JWT tokens.
  */
 @Service
-class JwtService(
+open class JwtService(
     @Value("\${eav-platform.security.jwt.secret-key}") private val secretKey: String,
     @Value("\${eav-platform.security.jwt.access-token.valid-minutes}") private val accessTokenValidMinutes: Long
 ) {
 
-    fun createToken(user: SecurityUser): String {
+    open fun createToken(user: SecurityUser): String {
         return createToken(user, mutableMapOf())
     }
 
-    fun createToken(user: SecurityUser, claims: MutableMap<String, Any>): String {
+    open fun createToken(user: SecurityUser, claims: MutableMap<String, Any>): String {
         val created = Date(OffsetDateTime.now().toEpochSecond())
         val expireAt = Date(OffsetDateTime.now().toEpochSecond() + (accessTokenValidMinutes * 60))
 
@@ -49,7 +49,7 @@ class JwtService(
      * @return An instance of Claims containing all extracted claims from the token.
      * @throws io.jsonwebtoken.JwtException if there is an error while extracting claims from the token.
      */
-    fun extractAllClaims(token: String): Claims {
+    open fun extractAllClaims(token: String): Claims {
         return Jwts
             .parser()
             .verifyWith(getSignInKey())
@@ -102,7 +102,7 @@ class JwtService(
      * @return true if the token is valid, false otherwise.
      * @throws io.jsonwebtoken.JwtException if there is an error while checking the token validity.
      */
-    fun isValid(token: String): Boolean {
+    open fun isValid(token: String): Boolean {
         try {
             Jwts.parser().verifyWith(getSignInKey()).build().parseSignedClaims(token)
             return !isTokenExpired(token)
