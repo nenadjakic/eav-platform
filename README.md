@@ -28,6 +28,7 @@
 ### Data Management with Spring Data JPA
 - Data model is implemented using Spring JPA (Java Persistence API).
 - Repository interfaces extend `JpaRepository`, providing methods for common database operations.
+- For enhanced performance and optimized data retrieval, `Entity graphs` is leveraged in certain scenarios.
 
 ## Requirements
 - **Java Development Kit (JDK):** While the project may work with JDK versions 21 or higher, it is recommended to use the latest stable version of JDK for optimal compatibility and performance.
