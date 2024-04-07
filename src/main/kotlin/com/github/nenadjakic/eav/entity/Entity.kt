@@ -2,7 +2,6 @@ package com.github.nenadjakic.eav.entity
 
 import jakarta.persistence.*
 import jakarta.persistence.Entity
-import org.springframework.context.annotation.Description
 
 /**
  * Represents an entity identifier.
@@ -10,7 +9,7 @@ import org.springframework.context.annotation.Description
  */
 @Entity
 @Table(schema = "public", name = "entity")
-class EntityId  : AbstractEntityId<Long>() {
+class Entity  : AbstractEntityId<Long>() {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "entity_id_seq")
     @SequenceGenerator(name = "entity_id_seq", allocationSize = 1)

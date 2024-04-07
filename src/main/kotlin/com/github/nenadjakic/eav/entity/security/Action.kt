@@ -7,7 +7,7 @@ package com.github.nenadjakic.eav.entity.security
  *
  * @property description A description of the action.
  */
-enum class Action(val description: String) {
+enum class Action(private val description: String) {
 
     /**
      * Represents no action.

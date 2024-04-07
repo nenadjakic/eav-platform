@@ -9,13 +9,31 @@ import jakarta.persistence.ManyToOne
  * This class is used as an embedded id in the EntityAttribute entity.
  */
 @Embeddable
-class EntityAttributeId (
+class EntityAttributeId {
 
     @ManyToOne
     @JoinColumn(name = "entity_id")
-    var entity: EntityId,
+    lateinit var entity: Entity
 
     @ManyToOne
     @JoinColumn(name = "attribute_id")
-    var attribute: Attribute,
-)
+    lateinit var attribute: Attribute
+
+    override fun equals(other: Any?): Boolean {
+        if (this === other) return true
+        if (javaClass != other?.javaClass) return false
+
+        other as EntityAttributeId
+
+        if (entity != other.entity) return false
+        if (attribute != other.attribute) return false
+
+        return true
+    }
+
+    override fun hashCode(): Int {
+        var result = entity.hashCode()
+        result = 31 * result + attribute.hashCode()
+        return result
+    }
+}

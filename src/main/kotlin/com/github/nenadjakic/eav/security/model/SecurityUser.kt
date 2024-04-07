@@ -1,6 +1,5 @@
 package com.github.nenadjakic.eav.security.model
 
-import com.github.nenadjakic.eav.entity.security.Role
 import com.github.nenadjakic.eav.entity.security.User
 import org.springframework.security.core.GrantedAuthority
 import org.springframework.security.core.authority.SimpleGrantedAuthority
@@ -17,7 +16,7 @@ class  SecurityUser() : UserDetails {
     private lateinit var expireAt: OffsetDateTime
 
     fun setUsername(value: String) {
-        username = value;
+        username = value
     }
 
     constructor(user: User) : this() {

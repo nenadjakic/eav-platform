@@ -11,8 +11,8 @@ class AttributePermissionEvaluator : PermissionEvaluator {
             return false
         }
 
-        val targetType: String = targetDomainObject::class.simpleName?.uppercase() ?: "";
-        return hasPermission(authentication, targetType, permission);
+        val targetType: String = targetDomainObject::class.simpleName?.uppercase() ?: ""
+        return hasPermission(authentication, targetType, permission)
 
 
     }

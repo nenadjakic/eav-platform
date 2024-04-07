@@ -26,7 +26,7 @@ abstract class AbstractEntity<T> : AbstractEntityDeleted<T>() {
      */
     @ManyToOne
     @JoinColumn(name = "created_user_id", insertable = true, updatable = false)
-    lateinit var created_by: User
+    lateinit var createdBy: User
 
     /**
      * The timestamp when the entity was last modified.
@@ -40,5 +40,5 @@ abstract class AbstractEntity<T> : AbstractEntityDeleted<T>() {
      */
     @ManyToOne
     @JoinColumn(name = "last_modified_user_id", insertable = false, updatable = true)
-    lateinit var modified_by: User
+    lateinit var modifiedBy: User
 }

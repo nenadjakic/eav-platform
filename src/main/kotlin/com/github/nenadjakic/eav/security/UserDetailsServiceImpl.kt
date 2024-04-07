@@ -1,6 +1,5 @@
 package com.github.nenadjakic.eav.security
 
-import com.github.nenadjakic.eav.entity.security.User
 import com.github.nenadjakic.eav.security.model.SecurityUser
 import com.github.nenadjakic.eav.service.security.UserService
 import org.springframework.security.core.userdetails.UserDetails
