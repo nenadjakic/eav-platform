@@ -1,5 +1,7 @@
 plugins {
     kotlin("jvm") version "1.9.23"
+    id("org.springframework.boot") version "3.2.4"
+    id("org.jetbrains.kotlin.plugin.spring") version "1.9.23"
     id("java-library")
 }
 
@@ -12,6 +14,8 @@ repositories {
 
 dependencies {
     implementation("org.jetbrains.kotlin:kotlin-reflect")
+    implementation("org.jetbrains.kotlin:kotlin-stdlib")
+
     implementation("org.springframework.boot:spring-boot-starter:3.2.4")
     implementation("org.springframework.boot:spring-boot-starter-data-jpa:3.2.4")
     implementation("org.springframework.boot:spring-boot-starter-security:3.2.4")

@@ -19,7 +19,7 @@ open class UserService(
 ) {
 
     open fun findByUsername(username: String): User? {
-        return userRepository.findByUsername(username).orElse(null)
+        return userRepository.findByUsername(username)
     }
 
     @Transactional
