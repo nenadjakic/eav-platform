@@ -29,7 +29,7 @@ class JwtAuthenticationFilter(private val jwtService: JwtService) : OncePerReque
         filterChain: FilterChain
     ) {
         if (!hasAuthorizationBearer(request)) {
-            filterChain.doFilter(request, response);
+            filterChain.doFilter(request, response)
             return
         }
         val token = getAccessToken(request)
@@ -39,8 +39,8 @@ class JwtAuthenticationFilter(private val jwtService: JwtService) : OncePerReque
             return
         }
 
-        setAuthenticationContext(token, request);
-        filterChain.doFilter(request, response);
+        setAuthenticationContext(token, request)
+        filterChain.doFilter(request, response)
     }
 
     private fun setAuthenticationContext(token: String, request: HttpServletRequest) {
@@ -52,7 +52,7 @@ class JwtAuthenticationFilter(private val jwtService: JwtService) : OncePerReque
     }
 
     private fun hasAuthorizationBearer(request: HttpServletRequest): Boolean {
-        val header = request.getHeader("Authorization");
+        val header = request.getHeader("Authorization")
         return !ObjectUtils.isEmpty(header) && header.startsWith("Bearer")
     }
 
@@ -64,12 +64,11 @@ class JwtAuthenticationFilter(private val jwtService: JwtService) : OncePerReque
     private fun getUserDetails(token: String): UserDetails {
         val userDetails = SecurityUser()
         val claims = jwtService.extractAllClaims(token)
-        userDetails.username = claims.get(Claims.SUBJECT) as String
+        userDetails.username = claims[Claims.SUBJECT] as String
         val anyRoles = claims["roles"]
         if (anyRoles != null && anyRoles is List<*>) {
-            anyRoles.filterIsInstance<String>().forEach { it -> userDetails.addAuthority(SimpleGrantedAuthority(it)) }
+            anyRoles.filterIsInstance<String>().forEach { userDetails.addAuthority(SimpleGrantedAuthority(it)) }
         }
-        userDetails.username = claims.get(Claims.SUBJECT) as String
 
         return userDetails
     }
