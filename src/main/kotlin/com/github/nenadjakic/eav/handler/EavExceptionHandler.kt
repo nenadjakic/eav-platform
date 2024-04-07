@@ -46,7 +46,7 @@ class EavExceptionHandler : ResponseEntityExceptionHandler() {
         logger.error("Exception occurred. in request: $path", ex)
         val body: ErrorInfo = if (ex is ConstraintViolationException && ex.constraintViolations.isNotEmpty()) {
             getErrorResponse(resultHttpStatus,
-                (ex as ConstraintViolationException).constraintViolations.stream()
+                ex.constraintViolations.stream()
                     .map { obj: ConstraintViolation<*> -> obj.message }
                     .collect(Collectors.toList()), path)
         } else {

@@ -17,7 +17,7 @@ import java.util.*
 
 
 @Configuration
-@EnableJpaRepositories(basePackages = ["com.github.nenadjakic.eav.repository.*"])
+@EnableJpaRepositories(basePackages = ["com.github.nenadjakic.eav.repository"])
 @EnableAsync
 open class MainConfiguration(
     private val userDetailsService: UserDetailsService,

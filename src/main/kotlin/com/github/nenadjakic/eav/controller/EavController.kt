@@ -19,10 +19,10 @@ interface EavController<RQ, RE> {
     fun findById(id: Long): ResponseEntity<RE>
 
     @PostMapping
-    fun create(dto:RQ): ResponseEntity<Void>
+    fun create(model:RQ): ResponseEntity<Void>
 
     @PutMapping
-    fun update(dto:RQ): ResponseEntity<Void>
+    fun update(model:RQ): ResponseEntity<Void>
 
     @DeleteMapping
     fun deleteById(id: Long): ResponseEntity<Void>
