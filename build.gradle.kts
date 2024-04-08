@@ -3,9 +3,10 @@ plugins {
     id("org.springframework.boot") version "3.2.4"
     id("org.jetbrains.kotlin.plugin.spring") version "1.9.23"
     id("java-library")
+    id("jacoco")
 }
 
-group = "org.example"
+group = "com.github.nenadjakic"
 version = "1.0-SNAPSHOT"
 
 repositories {
@@ -38,6 +39,32 @@ dependencies {
 tasks.test {
     useJUnitPlatform()
 }
+
+
+tasks.jacocoTestReport {
+    dependsOn("test")
+}
+
+tasks.jacocoTestCoverageVerification {
+    violationRules {
+        rule {
+            limit {
+                minimum = "0.0".toBigDecimal()
+            }
+        }
+    }
+}
+
+val testCoverage by tasks.registering {
+    group = "verification"
+    description = "Runs the unit tests with coverage."
+
+    dependsOn(":test", ":jacocoTestReport", ":jacocoTestCoverageVerification")
+    val jacocoTestReport = tasks.findByName("jacocoTestReport")
+    jacocoTestReport?.mustRunAfter(tasks.findByName("test"))
+    tasks.findByName("jacocoTestCoverageVerification")?.mustRunAfter(jacocoTestReport)
+}
+
 kotlin {
     jvmToolchain(21)
 }
