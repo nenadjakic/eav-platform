@@ -1,0 +1,13 @@
+INSERT INTO public.entity(id, name, description) values (10001, 'entity_1', null);
+INSERT INTO public.entity(id, name, description) values (10002, 'entity_2', 'description_2');
+INSERT INTO public.entity(id, name, description) values (10003, 'entity_3', null);
+INSERT INTO public.entity(id, name, description) values (10004, 'entity_4', null);
+INSERT INTO public.entity(id, name, description) values (10005, 'entity_5', null);
+INSERT INTO public.entity(id, name, description) values (10006, 'entity_6', null);
+INSERT INTO public.entity(id, name, description) values (10007, 'entity_7', null);
+INSERT INTO public.entity(id, name, description) values (10008, 'entity_8', null);
+INSERT INTO public.entity(id, name, description) values (10009, 'entity_9', null);
+INSERT INTO public.entity(id, name, description) values (100010, 'entity_10', null);
+INSERT INTO public.entity(id, name, description) values (100011, 'entity_11', null);
+INSERT INTO public.entity(id, name, description) values (100012, 'entity_12', null);
+INSERT INTO public.entity(id, name, description) values (100013, 'entity_13', null);
