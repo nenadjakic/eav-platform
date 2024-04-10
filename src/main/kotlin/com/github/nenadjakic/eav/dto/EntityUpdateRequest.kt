@@ -2,11 +2,9 @@ package com.github.nenadjakic.eav.dto
 
 import jakarta.validation.constraints.NotNull
 
-class EntityRequest {
-    interface AddValidationGroup
-    interface UpdateValidationGroup
+class EntityUpdateRequest {
 
-    @NotNull(groups = [ UpdateValidationGroup::class ])
+    @NotNull
     var id: Long? = null
 
     @NotNull

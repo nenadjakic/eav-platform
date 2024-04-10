@@ -1,6 +1,7 @@
 package com.github.nenadjakic.eav.configuration
 
 
+import com.github.nenadjakic.eav.dto.converter.EntityToEntityResponseConverter
 import com.github.nenadjakic.eav.dto.converter.RegisterRequestToUserConverter
 import org.modelmapper.ModelMapper
 import org.springframework.context.annotation.Bean
@@ -28,6 +29,7 @@ open class MainConfiguration(
     open fun modelMapper(): ModelMapper {
         val modelMapper = ModelMapper()
         modelMapper.addConverter(RegisterRequestToUserConverter(passwordEncoder))
+        modelMapper.addConverter(EntityToEntityResponseConverter())
 
         return modelMapper
     }
