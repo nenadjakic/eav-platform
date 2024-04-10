@@ -26,8 +26,8 @@ open class JwtService(
     }
 
     open fun createToken(user: SecurityUser, claims: MutableMap<String, Any>): String {
-        val created = Date(OffsetDateTime.now().toEpochSecond())
-        val expireAt = Date(OffsetDateTime.now().toEpochSecond() + (accessTokenValidMinutes * 60))
+        val created = Date(OffsetDateTime.now().toEpochSecond() * 1000)
+        val expireAt = Date((OffsetDateTime.now().toEpochSecond() + (accessTokenValidMinutes * 60)) * 1000)
 
         val roles = user.authorities.stream().map { it.authority } .collect(Collectors.toList())
         claims["roles"] = roles

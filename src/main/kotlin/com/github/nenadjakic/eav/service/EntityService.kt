@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service
 open class EntityService(
     private val entityRepository: EntityRepository
 ) : EavService<Entity> {
-    override fun findById(id: Long): Entity? {
+    open override fun findById(id: Long): Entity? {
         return entityRepository.findById(id).orElse(null)
     }
 
@@ -22,7 +22,7 @@ open class EntityService(
         return entityRepository.findAll(pager.toPageRequest())
     }
 
-    override fun delete(entity: Entity) {
+    open override fun delete(entity: Entity) {
         entityRepository.delete(entity)
     }
 
@@ -30,11 +30,11 @@ open class EntityService(
         entityRepository.deleteById(id)
     }
 
-    override fun update(entity: Entity): Entity {
+    open override fun update(entity: Entity): Entity {
         return entityRepository.save(entity)
     }
 
-    override fun create(entity: Entity): Entity {
+    open override fun create(entity: Entity): Entity {
         return entityRepository.save(entity)
     }
 }

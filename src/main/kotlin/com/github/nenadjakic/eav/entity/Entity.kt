@@ -8,15 +8,19 @@ import jakarta.persistence.Entity
  * This class is mapped to the "entity" table in the "public" schema.
  */
 @Entity
-@Table(schema = "public", name = "entity")
+@Table(schema = "public", name = "entity",
+    uniqueConstraints = [
+        UniqueConstraint(name = "uq_entity_name", columnNames = ["name"])
+    ])
 class Entity  : AbstractEntityId<Long>() {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "entity_id_seq")
     @SequenceGenerator(name = "entity_id_seq", allocationSize = 1)
     @Column(name = "id")
+    @PrimaryKeyJoinColumn
     override var id: Long? = null
 
-    @Column(name = "name")
+    @Column(name = "name", unique = true)
     lateinit var name: String
 
     @Column(name = "description")

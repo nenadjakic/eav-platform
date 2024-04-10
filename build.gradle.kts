@@ -34,22 +34,27 @@ dependencies {
     runtimeOnly("org.postgresql:postgresql:42.7.3")
 
     testImplementation("org.springframework.boot:spring-boot-starter-test:3.2.4")
+    testImplementation("com.h2database:h2:2.2.224")
+
 }
 
 tasks.test {
     useJUnitPlatform()
+    finalizedBy(tasks.jacocoTestReport)
 }
 
 
 tasks.jacocoTestReport {
-    dependsOn("test")
+    dependsOn(tasks.test)
 }
 
 tasks.jacocoTestCoverageVerification {
     violationRules {
         rule {
             limit {
-                minimum = "0.0".toBigDecimal()
+                counter = "LINE"
+                value = "TOTALCOUNT"
+                minimum = "0.3".toBigDecimal()
             }
         }
     }
