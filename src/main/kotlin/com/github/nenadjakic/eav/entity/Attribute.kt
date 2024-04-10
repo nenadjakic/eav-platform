@@ -19,6 +19,9 @@ class Attribute : AbstractEntityId<Long>() {
     @Column(name = "name")
     lateinit var name: String
 
+    @Column(name = "description")
+    var description: String? = null
+
     @OneToOne(mappedBy = "attribute")
     lateinit var metadata: Metadata
 }
