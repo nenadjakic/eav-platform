@@ -17,6 +17,15 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
+    services:
+      postgres:
+        image: postgres
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+      ports:
+        - 6432:5432
+
     steps:
       - name: Checkout source
         uses: actions/checkout@v4
