@@ -23,8 +23,8 @@ jobs:
         env:
           POSTGRES_USER: postgres
           POSTGRES_PASSWORD: postgres
-      ports:
-        - 6432:5432
+        ports:
+          - 6432:5432
 
     steps:
       - name: Checkout source
