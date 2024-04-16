@@ -1,5 +1,6 @@
 package com.github.nenadjakic.eav.controller
 
+import collectionMap
 import com.github.nenadjakic.eav.util.RestUtil
 import com.github.nenadjakic.eav.dto.AttributeAddResponse
 import com.github.nenadjakic.eav.dto.AttributeAddRequest
@@ -22,7 +23,7 @@ open class AttributeController(
 
     open override fun findAll(): ResponseEntity<List<AttributeAddResponse>> {
         val attributes = attributeService.findAll()
-        val response = RestUtil.map(modelMapper, attributes, AttributeAddResponse::class.java)
+        val response = modelMapper.collectionMap(attributes, AttributeAddResponse::class.java)
         return ResponseEntity.ok(response)
     }
 
@@ -34,7 +35,7 @@ open class AttributeController(
 
     open override fun findById(id: Long): ResponseEntity<AttributeAddResponse> {
         val attribute = attributeService.findById(id)
-        val response: AttributeAddResponse? = attribute?.let { RestUtil.map(modelMapper, attribute, AttributeAddResponse::class.java) }
+        val response: AttributeAddResponse? = attribute?.let { modelMapper.map(attribute, AttributeAddResponse::class.java) }
         return ResponseEntity.ofNullable(response)
 
     }
@@ -62,3 +63,4 @@ open class AttributeController(
         return ResponseEntity.created(location).build()
     }
 }
+
