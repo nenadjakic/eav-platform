@@ -14,13 +14,5 @@ class RestUtil {
             }
             return pager.build()
         }
-
-        fun <S, T> map(modelMapper: ModelMapper, source: S, type: Class<T>?): T = modelMapper.map(source, type)
-
-        fun <S, T> map(modelMapper: ModelMapper, source: List<S>?, type: Class<T>?): List<T> {
-            val result: MutableList<T> = ArrayList()
-            source?.forEach(Consumer { result.add(map(modelMapper, it, type)) })
-            return result
-        }
     }
 }

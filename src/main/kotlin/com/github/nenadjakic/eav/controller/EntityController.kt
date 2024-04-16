@@ -1,5 +1,6 @@
 package com.github.nenadjakic.eav.controller
 
+import collectionMap
 import com.github.nenadjakic.eav.util.RestUtil
 import com.github.nenadjakic.eav.dto.EntityAddRequest
 import com.github.nenadjakic.eav.dto.EntityResponse
@@ -23,7 +24,7 @@ class EntityController(
 
     open override fun findAll(): ResponseEntity<List<EntityResponse>> {
         val entities = entityService.findAll()
-        val response = RestUtil.map(modelMapper, entities, EntityResponse::class.java)
+        val response = modelMapper.collectionMap(entities, EntityResponse::class.java)
 
         return ResponseEntity.ok(response)
     }
