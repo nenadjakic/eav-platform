@@ -1,6 +1,6 @@
 package com.github.nenadjakic.eav.controller
 
-import com.github.nenadjakic.eav.dto.EntityResponse
+import com.github.nenadjakic.eav.dto.AttributeResponse
 import com.jayway.jsonpath.DocumentContext
 import com.jayway.jsonpath.JsonPath
 import org.junit.jupiter.api.Assertions.assertEquals
@@ -36,16 +36,16 @@ class AttributeControllerTest {
 
     @Test
     fun findById() {
-        val response = restTemplate.getForEntity("/attribute/10002", EntityResponse::class.java)
+        val response = restTemplate.getForEntity("/attribute/10002", AttributeResponse::class.java)
 
         assertEquals(200, response.statusCode.value())
 
         val documentContext: DocumentContext = JsonPath.parse(response.body)
-        val entityResponse = documentContext.json<EntityResponse>()
+        val attributeResponse = documentContext.json<AttributeResponse>()
 
-        assertEquals(10002, entityResponse.id)
-        assertEquals("entity_2", entityResponse.name)
-        assertEquals("description_2", entityResponse.description)
+        assertEquals(10002, attributeResponse.id)
+        assertEquals("attribute_2", attributeResponse.name)
+        assertEquals("description_2", attributeResponse.description)
     }
 
     @Test

@@ -25,10 +25,10 @@ class Metadata : AbstractEntityId<Long>() {
     @Column(name = "data_type")
     lateinit var dataType: DataType
 
-    @Column(name = "required")
+    @Column(name = "required", nullable = false)
     var required: Boolean = false
 
-    @Column(name = "repeatable")
+    @Column(name = "repeatable", nullable = false)
     var repeatable: Boolean = false
 
     @JdbcTypeCode(SqlTypes.JSON)
