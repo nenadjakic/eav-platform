@@ -20,6 +20,10 @@ class Entity  : AbstractEntityId<Long>() {
     @PrimaryKeyJoinColumn
     override var id: Long? = null
 
+    @ManyToOne
+    @JoinColumn(name = "entity_type_id", nullable = false, updatable = false)
+    lateinit var entityType: EntityType
+
     @Column(name = "name", nullable = false, unique = true)
     lateinit var name: String
 

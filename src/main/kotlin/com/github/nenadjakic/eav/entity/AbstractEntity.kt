@@ -4,6 +4,8 @@ import com.github.nenadjakic.eav.entity.security.User
 import jakarta.persistence.Column
 import jakarta.persistence.JoinColumn
 import jakarta.persistence.ManyToOne
+import org.springframework.data.annotation.CreatedBy
+import org.springframework.data.annotation.CreatedDate
 import java.time.OffsetDateTime
 
 /**
@@ -19,6 +21,7 @@ abstract class AbstractEntity<T> : AbstractEntityDeleted<T>() {
      * This field is automatically set to the current time when an entity is created.
      */
     @Column(name = "created", insertable = true, updatable = false)
+    @CreatedBy
     var created: OffsetDateTime = OffsetDateTime.now()
 
     /**
@@ -26,6 +29,7 @@ abstract class AbstractEntity<T> : AbstractEntityDeleted<T>() {
      */
     @ManyToOne
     @JoinColumn(name = "created_user_id", insertable = true, updatable = false)
+    @CreatedDate
     lateinit var createdBy: User
 
     /**

@@ -15,7 +15,6 @@ import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.boot.test.web.client.TestRestTemplate
 import org.springframework.test.context.TestPropertySource
 
-
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @TestPropertySource(locations=["classpath:application.properties"])
 class EntityControllerTest {
@@ -61,11 +60,14 @@ class EntityControllerTest {
         assertEquals(200, response.statusCode.value())
 
         val documentContext: DocumentContext = JsonPath.parse(response.body)
+
         val entityResponse = documentContext.json<EntityResponse>()
 
         assertEquals(10002, entityResponse.id)
         assertEquals("entity_2", entityResponse.name)
         assertEquals("description_2", entityResponse.description)
+        assertEquals(10001, entityResponse.entityTypeResponse.id)
+        assertEquals("entity_type_1", entityResponse.entityTypeResponse.name)
     }
 
     @Test
@@ -73,9 +75,10 @@ class EntityControllerTest {
         val request = EntityAddRequest()
         request.name = "new_name_added"
         request.description = "new_description"
+        request.entityTypeId = 10001
 
         val uri = restTemplate.postForLocation("/entity", request, Any::class.java)
-        assertTrue(uri.toString().endsWith("entity/1"))
+        assertTrue(uri.toString().matches(Regex(".*/entity/[0-9]+")))
     }
 
     @Test

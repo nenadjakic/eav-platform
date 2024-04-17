@@ -6,4 +6,7 @@ class EntityAddRequest {
     @NotNull
     lateinit var name: String
     var description: String? = null
+
+    @NotNull
+    var entityTypeId: Long? = null
 }
