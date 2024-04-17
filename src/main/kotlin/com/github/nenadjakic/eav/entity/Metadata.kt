@@ -18,6 +18,7 @@ class Metadata : AbstractEntityId<Long>() {
 
     @OneToOne
     @JoinColumn(name = "id")
+    @MapsId
     lateinit var attribute: Attribute
 
     @Enumerated(EnumType.STRING)
