@@ -1,3 +1,17 @@
+INSERT INTO public.entity_type(id, name, description)  values (10001, 'entity_type_1', null);
+INSERT INTO public.entity_type(id, name, description)  values (10002, 'entity_type_2', 'description_2');
+INSERT INTO public.entity_type(id, name, description)  values (10003, 'entity_type_3', null);
+INSERT INTO public.entity_type(id, name, description)  values (10004, 'entity_type_4', null);
+INSERT INTO public.entity_type(id, name, description)  values (10005, 'entity_type_5', null);
+INSERT INTO public.entity_type(id, name, description)  values (10006, 'entity_type_6', null);
+INSERT INTO public.entity_type(id, name, description)  values (10007, 'entity_type_7', null);
+INSERT INTO public.entity_type(id, name, description)  values (10008, 'entity_type_8', null);
+INSERT INTO public.entity_type(id, name, description)  values (10009, 'entity_type_9', null);
+INSERT INTO public.entity_type(id, name, description)  values (100010, 'entity_type_10', null);
+INSERT INTO public.entity_type(id, name, description)  values (100011, 'entity_type_11', null);
+INSERT INTO public.entity_type(id, name, description)  values (100012, 'entity_type_12', null);
+INSERT INTO public.entity_type(id, name, description)  values (100013, 'entity_type_13', null);
+/*
 INSERT INTO public.entity(id, name, description) values (10001, 'entity_1', null);
 INSERT INTO public.entity(id, name, description) values (10002, 'entity_2', 'description_2');
 INSERT INTO public.entity(id, name, description) values (10003, 'entity_3', null);
@@ -45,3 +59,4 @@ INSERT INTO public.metadata(id, data_type, required, repeatable) values(100010, 
 
 INSERT INTO public.attribute(id, name, description, entity_id) values(100011, 'attribute_11', 'description_11', 100013);
 INSERT INTO public.metadata(id, data_type, required, repeatable) values(100011, 'STRING', false, false);
+*/
