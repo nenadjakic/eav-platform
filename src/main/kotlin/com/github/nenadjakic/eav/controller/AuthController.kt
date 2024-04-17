@@ -8,6 +8,10 @@ import com.github.nenadjakic.eav.security.JwtService
 import com.github.nenadjakic.eav.security.model.SecurityUser
 import com.github.nenadjakic.eav.service.security.RefreshTokenService
 import com.github.nenadjakic.eav.service.security.UserService
+import io.swagger.v3.oas.annotations.Operation
+import io.swagger.v3.oas.annotations.responses.ApiResponse
+import io.swagger.v3.oas.annotations.responses.ApiResponses
+import io.swagger.v3.oas.annotations.tags.Tag
 import jakarta.validation.Valid
 import org.modelmapper.ModelMapper
 import org.springframework.http.HttpStatus
@@ -18,7 +22,7 @@ import org.springframework.security.core.Authentication
 import org.springframework.validation.annotation.Validated
 import org.springframework.web.bind.annotation.*
 
-
+@Tag(name = "Authentication controller", description = "API endpoints for user authentication.")
 @RestController
 @RequestMapping("/auth")
 @Validated
@@ -43,6 +47,15 @@ open class AuthController(
      *         Returns ResponseEntity.created() if the registration is successful, otherwise returns an
      *         appropriate error response.
      */
+    @Operation(
+        summary = "Register a new user.",
+        description = "Creates a new user account based on the provided registration request."
+    )
+    @ApiResponses(
+        value = [
+            ApiResponse(responseCode = "201", description = "User registered successfully.")
+        ]
+    )
     @PostMapping("/register")
     open fun register(@Valid @RequestBody registerRequest: RegisterRequest): ResponseEntity<Void> {
         val user = modelMapper.map(registerRequest, User::class.java)
@@ -62,6 +75,15 @@ open class AuthController(
      *         Returns ResponseEntity.ok() if the email is successfully confirmed,
      *         otherwise returns an appropriate error response.
      */
+    @Operation(
+        summary = "Confirm email.",
+        description = "Confirms the user's email address based on the provided confirmation token."
+    )
+    @ApiResponses(
+        value = [
+            ApiResponse(responseCode = "200", description = "Email confirmed successfully")
+        ]
+    )
     @GetMapping("/confirm-email")
     open fun confirmEmail(@RequestParam(name = "token") token: String): ResponseEntity<String> {
         userService.confirmEmail(token)
@@ -80,6 +102,15 @@ open class AuthController(
      *         Returns ResponseEntity.ok() with a TokenResponse if authentication is successful,
      *         otherwise returns an appropriate error response.
      */
+    @Operation(
+        summary = "Sign in user.",
+        description = "Signs in a user based on the provided credentials."
+    )
+    @ApiResponses(
+        value = [
+            ApiResponse(responseCode = "200", description = "User signed in successfully.")
+        ]
+    )
     @PostMapping("/signin")
     open fun signIn(
          @Valid @RequestBody signInRequest: SignInRequest
