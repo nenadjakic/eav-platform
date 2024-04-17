@@ -10,4 +10,7 @@ class AttributeUpdateRequest {
     @NotNull
     lateinit var name: String
     var description: String? = null
+
+    @NotNull
+    lateinit var metadata: MetadataRequest
 }

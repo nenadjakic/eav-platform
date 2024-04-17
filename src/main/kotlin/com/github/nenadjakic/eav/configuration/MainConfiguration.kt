@@ -1,8 +1,6 @@
 package com.github.nenadjakic.eav.configuration
 
-
-import com.github.nenadjakic.eav.dto.converter.EntityToEntityResponseConverter
-import com.github.nenadjakic.eav.dto.converter.RegisterRequestToUserConverter
+import com.github.nenadjakic.eav.dto.converter.*
 import org.modelmapper.ModelMapper
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
@@ -15,7 +13,6 @@ import org.springframework.security.config.annotation.authentication.configurati
 import org.springframework.security.core.userdetails.UserDetailsService
 import org.springframework.security.crypto.password.PasswordEncoder
 import java.util.*
-
 
 @Configuration
 @EnableJpaRepositories(basePackages = ["com.github.nenadjakic.eav.repository"])
@@ -30,6 +27,9 @@ open class MainConfiguration(
         val modelMapper = ModelMapper()
         modelMapper.addConverter(RegisterRequestToUserConverter(passwordEncoder))
         modelMapper.addConverter(EntityToEntityResponseConverter())
+        modelMapper.addConverter(AttributeAddRequestToAttributeConverter())
+        modelMapper.addConverter(AttributeToAttributeResponseConverter())
+        modelMapper.addConverter(AttributeUpdateRequestToAttributeConverter())
 
         return modelMapper
     }

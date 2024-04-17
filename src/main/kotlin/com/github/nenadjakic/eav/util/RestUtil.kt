@@ -1,8 +1,6 @@
 package com.github.nenadjakic.eav.util
 
 import com.github.nenadjakic.eav.service.model.Pager
-import org.modelmapper.ModelMapper
-import java.util.function.Consumer
 
 
 class RestUtil {
