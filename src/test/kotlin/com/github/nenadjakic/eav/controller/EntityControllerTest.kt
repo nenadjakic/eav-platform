@@ -10,16 +10,13 @@ import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
-import org.junit.jupiter.api.extension.ExtendWith
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.boot.test.web.client.TestRestTemplate
 import org.springframework.test.context.TestPropertySource
-import org.springframework.test.context.junit.jupiter.SpringExtension
 
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-@ExtendWith(SpringExtension::class)
 @TestPropertySource(locations=["classpath:application.properties"])
 class EntityControllerTest {
 
@@ -47,7 +44,7 @@ class EntityControllerTest {
         val response = restTemplate.getForEntity("/entity/page?pageNumber={pageNumber}&pageSize={pageSize}", Any::class.java, 0, 10)
         assertEquals(200, response.statusCode.value())
         assertEquals(10, (response.body as Map<*, *>)["size"])
-        assertEquals(10, ((response.body as Map<*, *>)["content"] as Collection<EntityResponse>).size)
+        assertEquals(10, ((response.body as Map<*, *>)["content"] as Collection<*>).size)
     }
 
     @Test
