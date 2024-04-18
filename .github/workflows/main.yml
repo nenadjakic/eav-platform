@@ -33,7 +33,7 @@ jobs:
     steps:
       - name: Set up PostgeSQL
         run: |
-          PGPASSWORD=postgres psql -U postgres -h 127.0.0.1 -p 6432 -d eav-test -c "CREATE SCHEMA IF NOT EXISTS public;" -c "CREATE SCHEMA IF NOT EXISTS security;"
+          PGPASSWORD=postgres psql -U postgres -h 127.0.0.1 -p 6432 -d eav-test -c "CREATE DATABASE eav-test;" -c "CREATE SCHEMA IF NOT EXISTS public;" -c "CREATE SCHEMA IF NOT EXISTS security;"
 
       - name: Checkout source
         uses: actions/checkout@v4
