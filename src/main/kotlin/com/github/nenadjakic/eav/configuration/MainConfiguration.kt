@@ -30,6 +30,8 @@ open class MainConfiguration(
         modelMapper.addConverter(AttributeAddRequestToAttributeConverter())
         modelMapper.addConverter(AttributeToAttributeResponseConverter())
         modelMapper.addConverter(AttributeUpdateRequestToAttributeConverter())
+        modelMapper.addConverter(AttributeValueToAttributeValueResponseConverter())
+        modelMapper.addConverter(EntityTypeToEntityTypeResponseConverter())
 
         return modelMapper
     }

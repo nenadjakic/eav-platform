@@ -1,23 +1,19 @@
 package com.github.nenadjakic.eav.controller
 
-import com.github.nenadjakic.eav.extension.collectionMap
-import com.github.nenadjakic.eav.util.RestUtil
-import com.github.nenadjakic.eav.dto.AttributeResponse
 import com.github.nenadjakic.eav.dto.AttributeAddRequest
+import com.github.nenadjakic.eav.dto.AttributeResponse
 import com.github.nenadjakic.eav.dto.AttributeUpdateRequest
 import com.github.nenadjakic.eav.entity.Attribute
+import com.github.nenadjakic.eav.extension.collectionMap
 import com.github.nenadjakic.eav.service.AttributeService
+import com.github.nenadjakic.eav.util.RestUtil
 import io.swagger.v3.oas.annotations.Operation
 import io.swagger.v3.oas.annotations.responses.ApiResponse
 import io.swagger.v3.oas.annotations.responses.ApiResponses
 import io.swagger.v3.oas.annotations.tags.Tag
-import jakarta.validation.Valid
 import org.modelmapper.ModelMapper
 import org.springframework.data.domain.Page
 import org.springframework.http.ResponseEntity
-import org.springframework.validation.annotation.Validated
-import org.springframework.web.bind.annotation.PostMapping
-import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder
@@ -62,20 +58,19 @@ open class AttributeController(
 
     @Operation(
         operationId = "findAttributeById",
-        summary = "Get entity by id.",
-        description = "Returns an entity with the specified id."
+        summary = "Get attribute by id.",
+        description = "Returns an attribute with the specified id."
     )
     @ApiResponses(
         value = [
             ApiResponse(responseCode = "200", description = "Successfully retrieved attribute."),
-            ApiResponse(responseCode = "404", description = "Entity not found.")
+            ApiResponse(responseCode = "404", description = "Attribute not found.")
         ]
     )
     open override fun findById(id: Long): ResponseEntity<AttributeResponse> {
         val attribute = attributeService.findById(id)
         val response: AttributeResponse? = attribute?.let { modelMapper.map(attribute, AttributeResponse::class.java) }
         return ResponseEntity.ofNullable(response)
-
     }
 
     @Operation(

@@ -12,19 +12,19 @@ INSERT INTO public.entity_type(id, name, description)  values (100011, 'entity_t
 INSERT INTO public.entity_type(id, name, description)  values (100012, 'entity_type_12', null);
 INSERT INTO public.entity_type(id, name, description)  values (100013, 'entity_type_13', null);
 
-INSERT INTO public.entity(id, name, description, entity_type_id) values (10001, 'entity_1', null, 10001);
-INSERT INTO public.entity(id, name, description, entity_type_id) values (10002, 'entity_2', 'description_2', 10001);
-INSERT INTO public.entity(id, name, description, entity_type_id) values (10003, 'entity_3', null, 10001);
-INSERT INTO public.entity(id, name, description, entity_type_id) values (10004, 'entity_4', null, 10001);
-INSERT INTO public.entity(id, name, description, entity_type_id) values (10005, 'entity_5', null, 10001);
-INSERT INTO public.entity(id, name, description, entity_type_id) values (10006, 'entity_6', null, 10001);
-INSERT INTO public.entity(id, name, description, entity_type_id) values (10007, 'entity_7', null, 10001);
-INSERT INTO public.entity(id, name, description, entity_type_id) values (10008, 'entity_8', null, 10001);
-INSERT INTO public.entity(id, name, description, entity_type_id) values (10009, 'entity_9', null, 10001);
-INSERT INTO public.entity(id, name, description, entity_type_id) values (100010, 'entity_10', null, 10001);
-INSERT INTO public.entity(id, name, description, entity_type_id) values (100011, 'entity_11', null, 10001);
-INSERT INTO public.entity(id, name, description, entity_type_id) values (100012, 'entity_12', null, 10001);
-INSERT INTO public.entity(id, name, description, entity_type_id) values (100013, 'entity_13', null, 10001);
+INSERT INTO public.entity(id, entity_type_id) values (10001, 10001);
+INSERT INTO public.entity(id, entity_type_id) values (10002, 10001);
+INSERT INTO public.entity(id, entity_type_id) values (10003, 10001);
+INSERT INTO public.entity(id, entity_type_id) values (10004, 10001);
+INSERT INTO public.entity(id, entity_type_id) values (10005, 10001);
+INSERT INTO public.entity(id, entity_type_id) values (10006, 10001);
+INSERT INTO public.entity(id, entity_type_id) values (10007, 10001);
+INSERT INTO public.entity(id, entity_type_id) values (10008, 10001);
+INSERT INTO public.entity(id, entity_type_id) values (10009, 10001);
+INSERT INTO public.entity(id, entity_type_id) values (100010, 10001);
+INSERT INTO public.entity(id, entity_type_id) values (100011, 10001);
+INSERT INTO public.entity(id, entity_type_id) values (100012, 10001);
+INSERT INTO public.entity(id, entity_type_id) values (100013, 10001);
 
 /*
 INSERT INTO public.attribute(id, name, description, entity_id) values(10001, 'attribute_1', 'description_1', 100013);

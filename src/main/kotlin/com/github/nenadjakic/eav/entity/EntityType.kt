@@ -21,4 +21,17 @@ class EntityType : AbstractEntityId<Long>() {
 
     @Column(name = "description", length = 1000)
     var description: String? = null
+
+    @OneToMany(mappedBy = "entityType")
+    private val _attributes: MutableSet<Attribute> = mutableSetOf()
+
+    var attributes: Set<Attribute>
+        get() = _attributes.toSet()
+        set(value) {
+            _attributes.clear()
+            _attributes.addAll(value)
+        }
+
+    fun addAttribute(attribute: Attribute): Boolean = _attributes.add(attribute)
+
 }

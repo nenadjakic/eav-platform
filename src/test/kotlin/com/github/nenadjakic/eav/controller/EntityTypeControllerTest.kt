@@ -73,12 +73,12 @@ class EntityTypeControllerTest {
     @Test
     @DisplayName("Create new entity type.")
     fun create() {
-        val request = EntityAddRequest()
+        val request = EntityTypeAddRequest()
         request.name = "new_name_added"
         request.description = "new_description"
-
         val uri = restTemplate.postForLocation("/entity-type", request, Any::class.java)
-        assertTrue(uri.toString().endsWith("entity-type/1"))
+        val response = restTemplate.getForEntity(uri, EntityTypeResponse::class.java)
+        assertEquals(200, response.statusCode.value())
     }
 
     @Test

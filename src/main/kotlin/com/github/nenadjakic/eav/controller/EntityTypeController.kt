@@ -3,7 +3,6 @@ package com.github.nenadjakic.eav.controller
 import com.github.nenadjakic.eav.dto.EntityTypeAddRequest
 import com.github.nenadjakic.eav.dto.EntityTypeResponse
 import com.github.nenadjakic.eav.dto.EntityTypeUpdateRequest
-import com.github.nenadjakic.eav.entity.Entity
 import com.github.nenadjakic.eav.entity.EntityType
 import com.github.nenadjakic.eav.extension.collectionMap
 import com.github.nenadjakic.eav.service.EntityTypeService

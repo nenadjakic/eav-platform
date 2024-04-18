@@ -8,10 +8,7 @@ import jakarta.persistence.Entity
  * This class is mapped to the "entity" table in the "public" schema.
  */
 @Entity
-@Table(schema = "public", name = "entity",
-    uniqueConstraints = [
-        UniqueConstraint(name = "uq_entity_name", columnNames = ["name"])
-    ])
+@Table(schema = "public", name = "entity")
 class Entity  : AbstractEntityId<Long>() {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "entity_id_seq")
@@ -23,13 +20,7 @@ class Entity  : AbstractEntityId<Long>() {
     @ManyToOne
     @JoinColumn(name = "entity_type_id", nullable = false, updatable = false)
     lateinit var entityType: EntityType
-
-    @Column(name = "name", nullable = false, unique = true)
-    lateinit var name: String
-
-    @Column(name = "description")
-    var description: String? = null
-
+/*
     @OneToMany(mappedBy = "entity")
     private val _attributes: MutableSet<Attribute> = mutableSetOf()
 
@@ -41,4 +32,6 @@ class Entity  : AbstractEntityId<Long>() {
         }
 
     fun addAttribute(attribute: Attribute): Boolean = _attributes.add(attribute)
+
+ */
 }

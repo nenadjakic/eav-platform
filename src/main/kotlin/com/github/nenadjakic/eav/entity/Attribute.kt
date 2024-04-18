@@ -10,7 +10,7 @@ import jakarta.persistence.Entity
 @Entity
 @Table(schema = "public", name = "attribute",
     uniqueConstraints = [
-        UniqueConstraint(name = "uq_attribute_entity_id_name", columnNames = ["name"])
+        UniqueConstraint(name = "uq_attribute_entity_type_id_name", columnNames = ["entity_type_id", "name"])
     ])
 class Attribute : AbstractEntityId<Long>() {
     @Id
@@ -20,13 +20,13 @@ class Attribute : AbstractEntityId<Long>() {
     override var id: Long? = null
 
     @ManyToOne(optional = false)
-    @JoinColumn(name = "entity_id", updatable = false)
-    lateinit var entity: com.github.nenadjakic.eav.entity.Entity
+    @JoinColumn(name = "entity_type_id", updatable = false)
+    lateinit var entityType: EntityType
 
-    @Column(name = "name", nullable = false, unique = true)
+    @Column(name = "name", nullable = false, unique = true, length = 100)
     lateinit var name: String
 
-    @Column(name = "description")
+    @Column(name = "description", length = 1000)
     var description: String? = null
 
     @OneToOne(mappedBy = "attribute", cascade = [CascadeType.ALL], optional = false)

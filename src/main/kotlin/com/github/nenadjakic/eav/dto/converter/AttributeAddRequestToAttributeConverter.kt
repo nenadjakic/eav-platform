@@ -2,15 +2,15 @@ package com.github.nenadjakic.eav.dto.converter
 
 import com.github.nenadjakic.eav.dto.AttributeAddRequest
 import com.github.nenadjakic.eav.entity.Attribute
-import com.github.nenadjakic.eav.entity.Entity
+import com.github.nenadjakic.eav.entity.EntityType
 import com.github.nenadjakic.eav.entity.Metadata
 import org.modelmapper.AbstractConverter
 
 class AttributeAddRequestToAttributeConverter : AbstractConverter<AttributeAddRequest, Attribute>() {
     override fun convert(source: AttributeAddRequest?): Attribute {
         val destination = Attribute()
-        destination.entity = Entity()
-        destination.entity.id = source!!.entityId
+        destination.entityType = EntityType()
+        destination.entityType.id = source!!.entityTypeId!!
         destination.name = source.name
         destination.description = source.description
 

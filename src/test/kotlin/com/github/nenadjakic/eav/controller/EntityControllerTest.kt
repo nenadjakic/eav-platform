@@ -64,8 +64,6 @@ class EntityControllerTest {
         val entityResponse = documentContext.json<EntityResponse>()
 
         assertEquals(10002, entityResponse.id)
-        assertEquals("entity_2", entityResponse.name)
-        assertEquals("description_2", entityResponse.description)
         assertEquals(10001, entityResponse.entityTypeResponse.id)
         assertEquals("entity_type_1", entityResponse.entityTypeResponse.name)
     }
@@ -73,8 +71,6 @@ class EntityControllerTest {
     @Test
     fun create() {
         val request = EntityAddRequest()
-        request.name = "new_name_added"
-        request.description = "new_description"
         request.entityTypeId = 10001
 
         val uri = restTemplate.postForLocation("/entity", request, Any::class.java)
@@ -94,8 +90,6 @@ class EntityControllerTest {
         val documentContext: DocumentContext = JsonPath.parse(response.body)
         val entityResponse = documentContext.json<EntityResponse>()
         assertEquals(10001, entityResponse.id)
-        assertEquals("new_name_updated", entityResponse.name)
-        assertEquals("new_description", entityResponse.description)
     }
 
     @Test

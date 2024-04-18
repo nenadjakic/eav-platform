@@ -38,7 +38,7 @@ class User : AbstractEntityId<Long>() {
 
     @ManyToMany
     @JoinTable(
-        name = "user_role",
+        schema = "security", name = "user_role",
         joinColumns = [JoinColumn(name = "user_id", referencedColumnName = "id")],
         inverseJoinColumns = [JoinColumn(name = "role_id", referencedColumnName = "id")]
     )

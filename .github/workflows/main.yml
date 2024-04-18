@@ -42,5 +42,5 @@ jobs:
       - name: Run build with Gradle Wrapper
         run: ./gradlew build -x test
 
-      #- name: Run code coverage verification
-      #  run: ./gradlew testCoverage
+      - name: Run code coverage verification
+        run: ./gradlew testCoverage

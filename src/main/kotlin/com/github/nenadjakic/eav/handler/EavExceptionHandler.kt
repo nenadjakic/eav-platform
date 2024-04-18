@@ -49,6 +49,7 @@ class EavExceptionHandler : ResponseEntityExceptionHandler() {
 
     @ExceptionHandler(Exception::class)
     fun handleGeneralException(ex: Exception, request: WebRequest?): ResponseEntity<ErrorInfo> {
+        logger.error("Error occurred.", ex)
         return getErrorInfoResponseEntity(HttpStatus.INTERNAL_SERVER_ERROR, ex, request as ServletWebRequest)
     }
 

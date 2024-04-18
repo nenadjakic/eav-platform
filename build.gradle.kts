@@ -27,6 +27,11 @@ dependencies {
     implementation("io.jsonwebtoken:jjwt-impl:0.12.5")
     implementation("io.jsonwebtoken:jjwt-jackson:0.12.5")
     implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.5.0")
+    // implementation("jakarta.xml.bind:jakarta.xml.bind-api:4.0.2")
+    // implementation("org.glassfish.jaxb:jaxb-runtime:4.0.5")
+    // implementation("com.fasterxml.jackson.dataformat:jackson-dataformat-xml:2.17.0")
+
+
 
     //implementation("jakarta.validation:jakarta.validation-api:3.0.2")
     implementation("org.modelmapper:modelmapper:3.2.0")
