@@ -31,9 +31,13 @@ jobs:
           --health-timeout 5s
           --health-retries 5
     steps:
-      - name: Set up PostgeSQL
+      - name: Set up PostgeSQL database
         run: |
-          PGPASSWORD=postgres psql -U postgres -h 127.0.0.1 -p 6432 -d eav-test -c "CREATE DATABASE eav-test;" -c "CREATE SCHEMA IF NOT EXISTS public;" -c "CREATE SCHEMA IF NOT EXISTS security;"
+          PGPASSWORD=postgres psql -U postgres -h 127.0.0.1 -p 6432 -c "CREATE DATABASE eav-test;"
+
+      - name: Set up PostgeSQL schemas
+        run: |
+          PGPASSWORD=postgres psql -U postgres -h 127.0.0.1 -p 6432 -d eav-test -c "CREATE SCHEMA IF NOT EXISTS public;" -c "CREATE SCHEMA IF NOT EXISTS security;"
 
       - name: Checkout source
         uses: actions/checkout@v4
