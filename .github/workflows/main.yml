@@ -33,7 +33,7 @@ jobs:
     steps:
       - name: Set up PostgeSQL database
         run: |
-          PGPASSWORD=postgres psql -U postgres -h 127.0.0.1 -p 6432 -c "CREATE DATABASE eav-test;"
+          PGPASSWORD=postgres psql -U postgres -h 127.0.0.1 -p 6432 -c "CREATE DATABASE \"eav-test\";"
 
       - name: Set up PostgeSQL schemas
         run: |
