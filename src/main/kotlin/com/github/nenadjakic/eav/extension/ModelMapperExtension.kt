@@ -1,5 +1,5 @@
-import com.github.nenadjakic.eav.dto.AttributeAddResponse
-import com.github.nenadjakic.eav.entity.Attribute
+package com.github.nenadjakic.eav.extension
+
 import org.modelmapper.ModelMapper
 import java.util.function.Consumer
 

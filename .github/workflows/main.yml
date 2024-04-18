@@ -25,8 +25,20 @@ jobs:
           POSTGRES_PASSWORD: postgres
         ports:
           - 6432:5432
-
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
     steps:
+      - name: Set up PostgeSQL database
+        run: |
+          PGPASSWORD=postgres psql -U postgres -h 127.0.0.1 -p 6432 -c "CREATE DATABASE \"eav-test\";"
+
+      - name: Set up PostgeSQL schemas
+        run: |
+          PGPASSWORD=postgres psql -U postgres -h 127.0.0.1 -p 6432 -d eav-test -c "CREATE SCHEMA IF NOT EXISTS public;" -c "CREATE SCHEMA IF NOT EXISTS security;"
+
       - name: Checkout source
         uses: actions/checkout@v4
 
@@ -42,5 +54,5 @@ jobs:
       - name: Run build with Gradle Wrapper
         run: ./gradlew build -x test
 
-      #- name: Run code coverage verification
-      #  run: ./gradlew testCoverage
+      - name: Run code coverage verification
+        run: ./gradlew testCoverage

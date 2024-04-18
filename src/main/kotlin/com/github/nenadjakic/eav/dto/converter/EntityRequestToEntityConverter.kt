@@ -9,8 +9,6 @@ class EntityRequestToEntityConverter : AbstractConverter<EntityAddRequest, Entit
         val destination = Entity()
 
         destination.id = null
-        destination.name = source!!.name
-        destination.description = source.description
 
         return destination
     }

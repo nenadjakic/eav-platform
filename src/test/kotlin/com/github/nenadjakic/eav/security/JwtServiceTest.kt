@@ -14,7 +14,6 @@ import org.springframework.test.context.TestPropertySource
 import org.springframework.test.context.junit.jupiter.SpringExtension
 
 @SpringBootTest
-@ExtendWith(SpringExtension::class)
 @TestPropertySource(locations=["classpath:application.properties"])
 class JwtServiceTest {
 

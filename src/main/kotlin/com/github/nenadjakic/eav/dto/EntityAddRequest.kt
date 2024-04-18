@@ -4,6 +4,5 @@ import jakarta.validation.constraints.NotNull
 
 class EntityAddRequest {
     @NotNull
-    lateinit var name: String
-    var description: String? = null
+    var entityTypeId: Long? = null
 }

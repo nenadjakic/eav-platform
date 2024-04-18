@@ -8,7 +8,10 @@ import jakarta.persistence.Entity
  * This class is mapped to the "attribute" table in the "public" schema.
  */
 @Entity
-@Table(schema = "public", name = "attribute")
+@Table(schema = "public", name = "attribute",
+    uniqueConstraints = [
+        UniqueConstraint(name = "uq_attribute_entity_type_id_name", columnNames = ["entity_type_id", "name"])
+    ])
 class Attribute : AbstractEntityId<Long>() {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "attribute_id_seq")
@@ -16,12 +19,16 @@ class Attribute : AbstractEntityId<Long>() {
     @Column(name = "id")
     override var id: Long? = null
 
-    @Column(name = "name")
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "entity_type_id", updatable = false)
+    lateinit var entityType: EntityType
+
+    @Column(name = "name", nullable = false, unique = true, length = 100)
     lateinit var name: String
 
-    @Column(name = "description")
+    @Column(name = "description", length = 1000)
     var description: String? = null
 
-    @OneToOne(mappedBy = "attribute")
+    @OneToOne(mappedBy = "attribute", cascade = [CascadeType.ALL], optional = false)
     lateinit var metadata: Metadata
 }
