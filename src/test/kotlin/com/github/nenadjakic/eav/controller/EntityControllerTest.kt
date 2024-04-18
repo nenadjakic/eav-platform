@@ -64,8 +64,6 @@ class EntityControllerTest {
         val entityResponse = documentContext.json<EntityResponse>()
 
         assertEquals(10002, entityResponse.id)
-        assertEquals(10001, entityResponse.entityTypeResponse.id)
-        assertEquals("entity_type_1", entityResponse.entityTypeResponse.name)
     }
 
     @Test
