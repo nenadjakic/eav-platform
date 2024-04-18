@@ -29,8 +29,8 @@ jobs:
     steps:
       - name: Set up PostgeSQL
         run: |
-          psql -h localhost -p 6432 -U postgres -W postgres -d eav-test -c "CREATE SCHEMA IF NOT EXISTS public;"
-          psql -h localhost -p 6432 -U postgres -W postgres -d eav-test -c "CREATE SCHEMA IF NOT EXISTS security;"
+          psql -d postgresql://localhost:6432/eav-test -c "CREATE SCHEMA IF NOT EXISTS public;"
+          psql -d postgresql://localhost:6432/eav-test -c "CREATE SCHEMA IF NOT EXISTS security;"
 
       - name: Checkout source
         uses: actions/checkout@v4
