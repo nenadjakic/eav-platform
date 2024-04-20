@@ -1,9 +1,7 @@
 package com.github.nenadjakic.eav.entity.security
 
-import jakarta.persistence.Column
-import jakarta.persistence.EmbeddedId
-import jakarta.persistence.Entity
-import jakarta.persistence.Table
+import com.github.nenadjakic.eav.entity.Attribute
+import jakarta.persistence.*
 import org.hibernate.annotations.JdbcTypeCode
 import org.hibernate.type.SqlTypes
 
@@ -14,8 +12,19 @@ import org.hibernate.type.SqlTypes
 @Entity
 @Table(schema = "security", name = "attribute_permission")
 class AttributePermission {
+
     @EmbeddedId
     lateinit var roleAttributeId: RoleAttributeId
+
+    @ManyToOne
+    @JoinColumn(name = "role_id", nullable = false)
+    @MapsId("roleId")
+    lateinit var role: Role
+
+    @ManyToOne
+    @JoinColumn(name = "attribute_id", nullable = false)
+    @MapsId("attributeId")
+    lateinit var attribute: Attribute
 
     @JdbcTypeCode(SqlTypes.JSON)
     @Column(name = "actions", nullable = false)
