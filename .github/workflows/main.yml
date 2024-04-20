@@ -52,7 +52,7 @@ jobs:
         run: chmod +x ./gradlew
 
       - name: Run build with Gradle Wrapper
-        run: ./gradlew build -x test
+        run: ./gradlew build
 
       - name: Run code coverage verification
         run: ./gradlew testCoverage
