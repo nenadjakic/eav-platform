@@ -32,6 +32,7 @@ open class MainConfiguration(
         modelMapper.addConverter(AttributeUpdateRequestToAttributeConverter())
         modelMapper.addConverter(AttributeValueToAttributeValueResponseConverter())
         modelMapper.addConverter(EntityTypeToEntityTypeResponseConverter())
+        modelMapper.addConverter(AttributeValueAddRequestToAttributeValueConverter())
 
         return modelMapper
     }
