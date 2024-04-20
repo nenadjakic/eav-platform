@@ -11,7 +11,7 @@ class EntityToEntityResponseConverter : AbstractConverter<Entity, EntityResponse
     override fun convert(source: Entity?): EntityResponse {
         val attibuteValues: MutableList<AttributeValueSimpleResponse> = mutableListOf()
         source!!.attributeValues.forEach { attibuteValues.add(AttributeValueSimpleResponse(
-            AttributeSimpleResponse(it.entityAttributeId.attribute.id!!, it.entityAttributeId.attribute.name),
+            AttributeSimpleResponse(it.attribute.id!!, it.attribute.name),
             it.value
         )) }
         return EntityResponse(

@@ -15,7 +15,7 @@ open class AttributeValueService(
 ) {
     open fun findById(entityId: Long, attributeId: Long): AttributeValue? = attributeValueRepository.findById(getEntityAttributeId(entityId, attributeId)).orElse(null)
 
-    open  fun findByEntityId(entityId: Long) : List<AttributeValue> = attributeValueRepository.findByEntityAttributeId_Entity_Id(entityId)
+    open  fun findByEntityId(entityId: Long) : List<AttributeValue> = attributeValueRepository.findByEntityId(entityId)
 
     open fun findAll(): List<AttributeValue> {
         TODO("Not yet implemented")
@@ -39,10 +39,8 @@ open class AttributeValueService(
 
     private fun getEntityAttributeId(entityId: Long, attributeId: Long): EntityAttributeId {
         val entityAttributeId = EntityAttributeId()
-        entityAttributeId.entity = Entity()
-        entityAttributeId.entity.id = entityId
-        entityAttributeId.attribute = Attribute()
-        entityAttributeId.attribute.id = attributeId
+        entityAttributeId.entityId = entityId
+        entityAttributeId.attributeId = attributeId
 
         return entityAttributeId
     }

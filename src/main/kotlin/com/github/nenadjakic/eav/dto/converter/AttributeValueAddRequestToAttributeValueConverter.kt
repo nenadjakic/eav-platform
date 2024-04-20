@@ -11,10 +11,10 @@ class AttributeValueAddRequestToAttributeValueConverter : AbstractConverter<Attr
     override fun convert(source: AttributeValueAddRequest?): AttributeValue {
         val destination = AttributeValue()
         destination.entityAttributeId = EntityAttributeId()
-        destination.entityAttributeId.entity = Entity()
-        destination.entityAttributeId.entity.id = source!!.entityId!!
-        destination.entityAttributeId.attribute = Attribute()
-        destination.entityAttributeId.attribute.id = source.attributeId!!
+        destination.entity = Entity()
+        destination.entity.id = source!!.entityId!!
+        destination.attribute = Attribute()
+        destination.attribute.id = source.attributeId!!
         destination.value = source.value
         return destination
     }

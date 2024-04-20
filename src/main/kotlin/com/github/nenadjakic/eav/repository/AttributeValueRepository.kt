@@ -6,5 +6,5 @@ import org.springframework.data.jpa.repository.JpaRepository
 
 interface AttributeValueRepository : JpaRepository<AttributeValue, EntityAttributeId> {
     @Suppress("FunctionName")
-    fun findByEntityAttributeId_Entity_Id(entityId: Long): List<AttributeValue>
+    fun findByEntityId(entityId: Long): List<AttributeValue>
 }

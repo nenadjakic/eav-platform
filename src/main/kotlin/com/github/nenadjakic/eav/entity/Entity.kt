@@ -21,7 +21,7 @@ class Entity  : AbstractEntityId<Long>() {
     @JoinColumn(name = "entity_type_id", nullable = false, updatable = false)
     lateinit var entityType: EntityType
 
-    @OneToMany(mappedBy = "entityAttributeId.entity")
+    @OneToMany(mappedBy = "entity")
     private val _attributeValues: MutableList<AttributeValue> = mutableListOf()
 
     var attributeValues: List<AttributeValue>

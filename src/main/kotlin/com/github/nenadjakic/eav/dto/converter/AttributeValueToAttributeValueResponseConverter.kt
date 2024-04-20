@@ -10,10 +10,10 @@ class AttributeValueToAttributeValueResponseConverter : AbstractConverter<Attrib
     override fun convert(source: AttributeValue?): AttributeValueResponse {
 
         return AttributeValueResponse(
-            EntitySimpleResponse(source!!.entityAttributeId.entity.id!!),
+            EntitySimpleResponse(source!!.entity.id!!),
             AttributeSimpleResponse(
-                source.entityAttributeId.attribute.id!!,
-                source.entityAttributeId.attribute.name
+                source.attribute.id!!,
+                source.attribute.name
             ),
             source.value!!.toString())
     }
