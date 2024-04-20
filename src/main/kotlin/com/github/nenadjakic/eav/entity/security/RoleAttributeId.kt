@@ -13,11 +13,11 @@ import jakarta.persistence.ManyToOne
 class RoleAttributeId {
 
     @ManyToOne
-    @JoinColumn(name = "role_id")
+    @JoinColumn(name = "role_id", nullable = false)
     lateinit var role: Role
 
     @ManyToOne
-    @JoinColumn(name = "attribute_id")
+    @JoinColumn(name = "attribute_id", nullable = false)
     lateinit var attribute: Attribute
 
     override fun equals(other: Any?): Boolean {

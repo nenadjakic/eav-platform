@@ -12,11 +12,11 @@ import jakarta.persistence.ManyToOne
 class EntityAttributeId {
 
     @ManyToOne
-    @JoinColumn(name = "entity_id")
+    @JoinColumn(name = "entity_id", nullable = false)
     lateinit var entity: Entity
 
     @ManyToOne
-    @JoinColumn(name = "attribute_id")
+    @JoinColumn(name = "attribute_id", nullable = false)
     lateinit var attribute: Attribute
 
     override fun equals(other: Any?): Boolean {

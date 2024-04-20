@@ -18,22 +18,22 @@ class User : AbstractEntityId<Long>() {
     @Column(name = "id")
     override var id: Long? = null
 
-    @Column(name = "username", unique = true)
+    @Column(name = "username", unique = true, nullable = false, length = 200)
     lateinit var username: String
 
-    @Column(name = "password")
+    @Column(name = "password", nullable = false, length = 200)
     lateinit var password: String
 
-    @Column(name = "expire_at")
+    @Column(name = "expire_at", nullable = false)
     lateinit var expireAt: OffsetDateTime
 
-    @Column(name = "enabled")
+    @Column(name = "enabled", nullable = false)
     var enabled: Boolean = false
 
-    @Column(name = "email", unique = true)
+    @Column(name = "email", unique = true, nullable = false, length = 500)
     lateinit var email: String
 
-    @Column(name = "email_confirmed")
+    @Column(name = "email_confirmed", nullable = false)
     var emailConfirmed: Boolean = false
 
     @ManyToMany

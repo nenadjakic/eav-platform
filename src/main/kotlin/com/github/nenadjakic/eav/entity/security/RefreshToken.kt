@@ -22,10 +22,10 @@ class RefreshToken() : AbstractEntityId<Long>() {
     override var id: Long? = null
 
     @ManyToOne(cascade = [CascadeType.ALL])
-    @JoinColumn(name = "user_id")
+    @JoinColumn(name = "user_id", nullable = false)
     lateinit var user: User
 
-    @Column(name = "token", nullable = false)
+    @Column(name = "token", nullable = false, length = 100)
     lateinit var token: String
 
     @Column(name = "expire_at", nullable = false)

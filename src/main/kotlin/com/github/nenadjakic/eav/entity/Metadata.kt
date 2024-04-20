@@ -22,7 +22,7 @@ class Metadata : AbstractEntityId<Long>() {
     lateinit var attribute: Attribute
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "data_type")
+    @Column(name = "data_type", nullable = false)
     lateinit var dataType: DataType
 
     @Column(name = "required", nullable = false)

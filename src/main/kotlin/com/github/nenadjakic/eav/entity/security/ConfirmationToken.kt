@@ -20,7 +20,7 @@ class ConfirmationToken() : AbstractEntityId<Long>() {
 
     @OneToOne
     @MapsId
-    @JoinColumn(name = "id")
+    @JoinColumn(name = "id", nullable = false)
     lateinit var user: User
 
     @Column(name = "token", nullable = false)

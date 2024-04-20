@@ -18,7 +18,7 @@ class AttributePermission {
     lateinit var roleAttributeId: RoleAttributeId
 
     @JdbcTypeCode(SqlTypes.JSON)
-    @Column(name = "actions")
+    @Column(name = "actions", nullable = false)
     private val _actions: MutableSet<Action> = mutableSetOf()
 
     var actions: Set<Action>

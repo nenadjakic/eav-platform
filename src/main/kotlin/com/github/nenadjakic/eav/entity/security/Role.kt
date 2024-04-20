@@ -16,7 +16,7 @@ class Role : AbstractEntityId<Long>() {
     @Column(name = "id")
     override var id: Long? = null
 
-    @Column(name = "name")
+    @Column(name = "name", nullable = false, length = 100)
     lateinit var name: String
 
     @ManyToMany

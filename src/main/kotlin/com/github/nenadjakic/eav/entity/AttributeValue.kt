@@ -15,6 +15,14 @@ class AttributeValue {
     @Column(name = "position")
     var position: Int? = null
 
-    @Column(name = "value")
-    lateinit var value: String
+    @Column(name = "value", columnDefinition = "varchar", length = 1000, nullable = false)
+    private var _value: String? = null
+
+    var value: Any?
+        get() {
+            return _value as Any
+        }
+        set(value) {
+            _value = value.toString()
+        }
 }
