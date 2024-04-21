@@ -20,7 +20,7 @@ abstract class AbstractEntity<T> : AbstractEntityDeleted<T>() {
      * The timestamp when the entity was created.
      * This field is automatically set to the current time when an entity is created.
      */
-    @Column(name = "created", insertable = true, updatable = false)
+    @Column(name = "created", nullable = false, insertable = true, updatable = false)
     @CreatedBy
     var created: OffsetDateTime = OffsetDateTime.now()
 
@@ -28,7 +28,7 @@ abstract class AbstractEntity<T> : AbstractEntityDeleted<T>() {
      * The user who created the entity.
      */
     @ManyToOne
-    @JoinColumn(name = "created_user_id", insertable = true, updatable = false)
+    @JoinColumn(name = "created_user_id", nullable = false, insertable = true, updatable = false)
     @CreatedDate
     lateinit var createdBy: User
 
@@ -36,13 +36,13 @@ abstract class AbstractEntity<T> : AbstractEntityDeleted<T>() {
      * The timestamp when the entity was last modified.
      * This field is automatically updated to the current time when an entity is modified.
      */
-    @Column(name = "last_modified", insertable = false, updatable = true)
+    @Column(name = "last_modified", nullable = false, insertable = false, updatable = true)
     lateinit var modified: OffsetDateTime
 
     /**
      * The user who last modified the entity.
      */
     @ManyToOne
-    @JoinColumn(name = "last_modified_user_id", insertable = false, updatable = true)
+    @JoinColumn(name = "last_modified_user_id", nullable = false, insertable = false, updatable = true)
     lateinit var modifiedBy: User
 }

@@ -16,7 +16,7 @@ class Role : AbstractEntityId<Long>() {
     @Column(name = "id")
     override var id: Long? = null
 
-    @Column(name = "name")
+    @Column(name = "name", nullable = false, length = 100)
     lateinit var name: String
 
     @ManyToMany
@@ -25,7 +25,7 @@ class Role : AbstractEntityId<Long>() {
         inverseJoinColumns = [JoinColumn(name = "permission_id", referencedColumnName = "id")])
     private val _permissions: MutableList<Permission> = mutableListOf()
 
-    @OneToMany(mappedBy = "roleAttributeId.role")
+    @OneToMany(mappedBy = "role")
     private val _attributePermissions: MutableList<AttributePermission> = mutableListOf()
 
     var permissions: List<Permission>

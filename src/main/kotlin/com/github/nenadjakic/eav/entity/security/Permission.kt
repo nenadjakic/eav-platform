@@ -20,11 +20,11 @@ class Permission : AbstractEntityId<Long>() {
     @Column(name = "id")
     override var id: Long? = null
 
-    @Column(name = "name")
+    @Column(name = "name", nullable = false, length = 100)
     lateinit var name: String
 
-    @Column(name = "description")
-    lateinit var description: String
+    @Column(name = "description", length = 10000)
+    var description: String? = null
 
     @ManyToMany(mappedBy = "_permissions")
     private val _roles: MutableList<Role> = mutableListOf()

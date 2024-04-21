@@ -20,7 +20,7 @@ class Attribute : AbstractEntityId<Long>() {
     override var id: Long? = null
 
     @ManyToOne(optional = false)
-    @JoinColumn(name = "entity_type_id", updatable = false)
+    @JoinColumn(name = "entity_type_id", nullable = false, updatable = false)
     lateinit var entityType: EntityType
 
     @Column(name = "name", nullable = false, unique = true, length = 100)

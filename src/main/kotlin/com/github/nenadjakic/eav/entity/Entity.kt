@@ -20,18 +20,16 @@ class Entity  : AbstractEntityId<Long>() {
     @ManyToOne
     @JoinColumn(name = "entity_type_id", nullable = false, updatable = false)
     lateinit var entityType: EntityType
-/*
-    @OneToMany(mappedBy = "entity")
-    private val _attributes: MutableSet<Attribute> = mutableSetOf()
 
-    var attributes: Set<Attribute>
-        get() = _attributes.toSet()
+    @OneToMany(mappedBy = "entity")
+    private val _attributeValues: MutableList<AttributeValue> = mutableListOf()
+
+    var attributeValues: List<AttributeValue>
+        get() = _attributeValues
         set(value) {
-            _attributes.clear()
-            _attributes.addAll(value)
+            _attributeValues.clear()
+            _attributeValues.addAll(value)
         }
 
-    fun addAttribute(attribute: Attribute): Boolean = _attributes.add(attribute)
-
- */
+    fun addAttributeValue(attributeValue: AttributeValue): Boolean = _attributeValues.add(attributeValue)
 }

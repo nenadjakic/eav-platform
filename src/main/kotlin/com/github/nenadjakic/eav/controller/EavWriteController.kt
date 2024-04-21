@@ -3,6 +3,7 @@ package com.github.nenadjakic.eav.controller
 import jakarta.validation.Valid
 import org.springframework.http.MediaType
 import org.springframework.http.ResponseEntity
+import org.springframework.security.access.prepost.PreAuthorize
 import org.springframework.validation.annotation.Validated
 import org.springframework.web.bind.annotation.DeleteMapping
 import org.springframework.web.bind.annotation.PathVariable
@@ -20,13 +21,16 @@ import org.springframework.web.bind.annotation.RequestBody
 @Validated
 interface EavWriteController<CR, UR> {
 
+    @PreAuthorize("hasRole('WRITER')")
     @PostMapping(consumes = [MediaType.APPLICATION_JSON_VALUE],
         produces = [MediaType.APPLICATION_JSON_VALUE])
     fun create(@Valid @RequestBody model:CR): ResponseEntity<Void>
 
+    @PreAuthorize("hasRole('WRITER')")
     @PutMapping(consumes = [MediaType.APPLICATION_JSON_VALUE])
     fun update(@Valid @RequestBody model:UR): ResponseEntity<Void>
 
+    @PreAuthorize("hasRole('WRITER')")
     @DeleteMapping("/{id}")
     fun deleteById(@PathVariable id: Long): ResponseEntity<Void>
 }
