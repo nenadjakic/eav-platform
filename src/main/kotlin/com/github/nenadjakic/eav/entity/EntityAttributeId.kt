@@ -2,9 +2,6 @@ package com.github.nenadjakic.eav.entity
 
 import jakarta.persistence.Column
 import jakarta.persistence.Embeddable
-import jakarta.persistence.FetchType
-import jakarta.persistence.JoinColumn
-import jakarta.persistence.ManyToOne
 
 /**
  * Represents an embeddable identifier for the relationship between Entity and Attribute.

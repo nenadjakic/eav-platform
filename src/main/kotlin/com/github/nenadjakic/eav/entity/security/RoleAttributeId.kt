@@ -1,10 +1,7 @@
 package com.github.nenadjakic.eav.entity.security
 
-import com.github.nenadjakic.eav.entity.Attribute
 import jakarta.persistence.Column
 import jakarta.persistence.Embeddable
-import jakarta.persistence.JoinColumn
-import jakarta.persistence.ManyToOne
 
 /**
  * Represents an embeddable identifier for the relationship between Role and Attribute.

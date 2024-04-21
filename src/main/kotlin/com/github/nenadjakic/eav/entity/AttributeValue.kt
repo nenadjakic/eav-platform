@@ -2,7 +2,6 @@ package com.github.nenadjakic.eav.entity
 
 import jakarta.persistence.*
 import jakarta.persistence.Entity
-import kotlin.reflect.jvm.internal.impl.load.kotlin.JvmType
 
 @Entity
 @Table(schema = "public", name = "attribute_value")

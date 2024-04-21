@@ -3,7 +3,6 @@ package com.github.nenadjakic.eav.service
 import com.github.nenadjakic.eav.entity.security.AttributePermission
 import com.github.nenadjakic.eav.service.security.AttributePermissionService
 import jakarta.annotation.PostConstruct
-import org.hibernate.annotations.Cache
 import org.springframework.cache.CacheManager
 import org.springframework.cache.annotation.CachePut
 import org.springframework.stereotype.Service

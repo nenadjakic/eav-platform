@@ -1,8 +1,6 @@
 package com.github.nenadjakic.eav.service
 
-import com.github.nenadjakic.eav.entity.Attribute
 import com.github.nenadjakic.eav.entity.AttributeValue
-import com.github.nenadjakic.eav.entity.Entity
 import com.github.nenadjakic.eav.entity.EntityAttributeId
 import com.github.nenadjakic.eav.repository.AttributeValueRepository
 import com.github.nenadjakic.eav.service.model.Pager

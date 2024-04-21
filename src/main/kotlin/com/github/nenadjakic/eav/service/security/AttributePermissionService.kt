@@ -1,5 +1,6 @@
 package com.github.nenadjakic.eav.service.security
 
+import com.github.nenadjakic.eav.entity.security.Action
 import com.github.nenadjakic.eav.entity.security.AttributePermission
 import com.github.nenadjakic.eav.entity.security.RoleAttributeId
 import com.github.nenadjakic.eav.repository.security.AttributePermissionRepository
@@ -27,6 +28,10 @@ class AttributePermissionService(
 
     @Cacheable(value = ["attributePermissions"], key = "{ #roleName, #attributeId }")
     fun findByRoleNameAndAttributeId(roleName: String, attributeId: Long): AttributePermission? {
-             return attributePermissionRepository.findByRoleNameAndAttributeId(roleName, attributeId)
+        return attributePermissionRepository.findByRoleNameAndAttributeId(roleName, attributeId)
+    }
+
+    fun findByRoleNamesAndAttributeIdAndAction(roleNames: List<String>, attributeId: Long, action: Action): List<AttributePermission> {
+        TODO()
     }
 }

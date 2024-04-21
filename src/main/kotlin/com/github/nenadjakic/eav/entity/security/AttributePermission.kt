@@ -28,6 +28,7 @@ class AttributePermission {
 
     @JdbcTypeCode(SqlTypes.JSON)
     @Column(name = "actions", nullable = false)
+    @Enumerated(EnumType.STRING)
     private val _actions: MutableSet<Action> = mutableSetOf()
 
     var actions: Set<Action>
