@@ -15,4 +15,22 @@ class RoleAttributeId {
 
     @Column(name = "attribute_id", nullable = false)
     var attributeId: Long? = null
+
+    override fun equals(other: Any?): Boolean {
+        if (this === other) return true
+        if (javaClass != other?.javaClass) return false
+
+        other as RoleAttributeId
+
+        if (roleId != other.roleId) return false
+        if (attributeId != other.attributeId) return false
+
+        return true
+    }
+
+    override fun hashCode(): Int {
+        var result = roleId?.hashCode() ?: 0
+        result = 31 * result + (attributeId?.hashCode() ?: 0)
+        return result
+    }
 }

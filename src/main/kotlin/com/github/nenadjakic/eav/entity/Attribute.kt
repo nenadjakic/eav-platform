@@ -8,7 +8,9 @@ import jakarta.persistence.Entity
  * This class is mapped to the "attribute" table in the "public" schema.
  */
 @Entity
-@Table(schema = "public", name = "attribute",
+@Table(
+    schema = "public",
+    name = "attribute",
     uniqueConstraints = [
         UniqueConstraint(name = "uq_attribute_entity_type_id_name", columnNames = ["entity_type_id", "name"])
     ])

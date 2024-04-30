@@ -8,7 +8,13 @@ import jakarta.persistence.*
  * This class is mapped to the "role" table in the "security" schema.
  */
 @Entity
-@Table(schema = "security", name = "role")
+@Table(
+    schema = "security",
+    name = "role",
+    uniqueConstraints = [
+        UniqueConstraint(name = "uq_security_role_name", columnNames = [ "name" ])
+    ]
+)
 class Role : AbstractEntityId<Long>() {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "security.role_id_seq")
@@ -16,7 +22,7 @@ class Role : AbstractEntityId<Long>() {
     @Column(name = "id")
     override var id: Long? = null
 
-    @Column(name = "name", nullable = false, length = 100)
+    @Column(name = "name", nullable = false, length = 100, unique = true)
     lateinit var name: String
 
     @ManyToMany
