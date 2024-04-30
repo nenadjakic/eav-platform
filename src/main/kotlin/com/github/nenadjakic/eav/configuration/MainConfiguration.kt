@@ -8,10 +8,13 @@ import io.swagger.v3.oas.models.security.SecurityRequirement
 import io.swagger.v3.oas.models.security.SecurityScheme
 import org.modelmapper.ModelMapper
 import org.springframework.beans.factory.annotation.Value
+import org.springframework.beans.factory.support.BeanDefinitionRegistry
+import org.springframework.beans.factory.support.BeanDefinitionRegistryPostProcessor
 import org.springframework.cache.CacheManager
 import org.springframework.cache.concurrent.ConcurrentMapCacheManager
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
+import org.springframework.context.annotation.DependsOn
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories
 import org.springframework.scheduling.annotation.EnableAsync
 import org.springframework.security.authentication.AuthenticationManager
@@ -74,8 +77,9 @@ open class MainConfiguration(
     open fun authenticationManager(config: AuthenticationConfiguration): AuthenticationManager {
         return config.authenticationManager
     }
+
     @Bean
-    open fun authenticationProvider(userDetailsService: UserDetailsService?): AuthenticationProvider {
+    open fun authenticationProvider(): AuthenticationProvider {
         val provider = DaoAuthenticationProvider()
         provider.setUserDetailsService(userDetailsService)
         provider.setPasswordEncoder(passwordEncoder)

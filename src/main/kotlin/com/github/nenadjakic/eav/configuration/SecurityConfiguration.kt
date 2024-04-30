@@ -1,9 +1,12 @@
 package com.github.nenadjakic.eav.configuration
 
 import com.github.nenadjakic.eav.security.filter.JwtAuthenticationFilter
+import com.github.nenadjakic.eav.service.security.AttributePermissionService
+import org.springframework.beans.factory.config.BeanDefinition
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
-import org.springframework.security.access.vote.RoleVoter
+import org.springframework.context.annotation.DependsOn
+import org.springframework.context.annotation.Role
 import org.springframework.security.authentication.AuthenticationProvider
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity
 import org.springframework.security.config.annotation.web.builders.HttpSecurity
@@ -21,10 +24,12 @@ open class SecurityConfiguration(
     private val authenticationProvider: AuthenticationProvider,
     private val jwtAuthenticationFilter: JwtAuthenticationFilter
 ) {
-
-    @Bean
-    open fun grantedAuthorityDefaults() : GrantedAuthorityDefaults {
-        return GrantedAuthorityDefaults("");
+    companion object {
+        @Bean
+        @Role(BeanDefinition.ROLE_INFRASTRUCTURE)
+        open fun grantedAuthorityDefaults(): GrantedAuthorityDefaults {
+            return GrantedAuthorityDefaults("");
+        }
     }
 
     @Bean
