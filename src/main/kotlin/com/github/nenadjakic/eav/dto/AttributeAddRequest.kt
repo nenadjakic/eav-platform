@@ -2,7 +2,6 @@ package com.github.nenadjakic.eav.dto
 
 import jakarta.validation.Valid
 import jakarta.validation.constraints.NotNull
-import jakarta.xml.bind.annotation.XmlElement
 
 class AttributeAddRequest {
     @NotNull

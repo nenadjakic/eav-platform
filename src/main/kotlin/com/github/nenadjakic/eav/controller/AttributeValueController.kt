@@ -12,6 +12,7 @@ import io.swagger.v3.oas.annotations.tags.Tag
 import jakarta.validation.Valid
 import org.modelmapper.ModelMapper
 import org.springframework.http.ResponseEntity
+import org.springframework.security.access.prepost.PreAuthorize
 import org.springframework.validation.annotation.Validated
 import org.springframework.web.bind.annotation.DeleteMapping
 import org.springframework.web.bind.annotation.GetMapping
@@ -81,6 +82,7 @@ open class AttributeValueController(
         ]
     )
     @PostMapping
+    @PreAuthorize("@attributeSecurityService.canCreate(#attributeValueAddRequest.attributeId)")
     open fun create(@RequestBody @Valid attributeValueAddRequest: AttributeValueAddRequest): ResponseEntity<Void> {
         val attributeValue = modelMapper.map(attributeValueAddRequest, AttributeValue::class.java)
         val createdAttributeValue = attributeValueService.create(attributeValue)
@@ -106,6 +108,7 @@ open class AttributeValueController(
         ]
     )
     @PutMapping
+    @PreAuthorize("@attributeSecurityService.canUpdate(#attributeValueAddRequest.attributeId)")
     open fun update(@RequestBody @Valid attributeValueAddRequest: AttributeValueAddRequest): ResponseEntity<Void> {
         val attributeValue = modelMapper.map(attributeValueAddRequest, AttributeValue::class.java)
         attributeValueService.update(attributeValue)
@@ -123,6 +126,7 @@ open class AttributeValueController(
         ]
     )
     @DeleteMapping
+    @PreAuthorize("@attributeSecurityService.canDelete(#attributeId)")
     open fun deleteById(@PathVariable entityId: Long, @PathVariable attributeId: Long): ResponseEntity<Void> {
         attributeValueService.deleteById(entityId, attributeId)
         return ResponseEntity.noContent().build()
