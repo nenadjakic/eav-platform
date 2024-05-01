@@ -74,7 +74,7 @@ class AttributeSecurityService(
      * @return true if the user has permission to perform the action, otherwise false
      */
     private fun hasPermission(attributeId: Long, action: Action): Boolean {
-        var hasPermission = false;
+        var hasPermission = false
         for (role in getRoles(getUser() ?: throw Exception("User does not exists."))) {
             hasPermission = hasPermission(role, attributeId, action)
             if (hasPermission) {

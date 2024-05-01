@@ -6,7 +6,6 @@ import com.github.nenadjakic.eav.repository.AttributeValueRepository
 import com.github.nenadjakic.eav.service.model.Pager
 import org.springframework.data.domain.Page
 import org.springframework.security.access.prepost.PostFilter
-import org.springframework.security.access.prepost.PreAuthorize
 import org.springframework.stereotype.Service
 
 @Service
