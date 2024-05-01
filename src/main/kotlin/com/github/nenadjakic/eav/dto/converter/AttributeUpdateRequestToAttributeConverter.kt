@@ -9,6 +9,7 @@ class AttributeUpdateRequestToAttributeConverter : AbstractConverter<AttributeUp
     override fun convert(source: AttributeUpdateRequest?): Attribute {
         val destination: Attribute = Attribute()
         destination.id = source!!.id
+        destination.code = source.code
         destination.name = source.name
         destination.description = source.description
 

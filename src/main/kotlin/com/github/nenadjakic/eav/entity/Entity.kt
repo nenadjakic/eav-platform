@@ -8,7 +8,12 @@ import jakarta.persistence.Entity
  * This class is mapped to the "entity" table in the "public" schema.
  */
 @Entity
-@Table(schema = "public", name = "entity")
+@Table(
+    schema = "public",
+    name = "entity",
+    uniqueConstraints = [
+        UniqueConstraint(name = "uq_entity_entity_type_id_code", columnNames = [ "entity_type_id", "code"])
+    ])
 class Entity  : AbstractEntityId<Long>() {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "entity_id_seq")
@@ -20,6 +25,12 @@ class Entity  : AbstractEntityId<Long>() {
     @ManyToOne
     @JoinColumn(name = "entity_type_id", nullable = false, updatable = false)
     lateinit var entityType: EntityType
+
+    @Column(name = "code", nullable = false)
+    lateinit var code: String
+
+    @Column(name = "description", length = 1000)
+    var description: String? = null
 
     @OneToMany(mappedBy = "entity")
     private val _attributeValues: MutableList<AttributeValue> = mutableListOf()

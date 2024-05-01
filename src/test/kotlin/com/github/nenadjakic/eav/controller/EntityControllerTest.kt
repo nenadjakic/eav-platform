@@ -109,6 +109,7 @@ class EntityControllerTest {
     fun create() {
         val body = EntityAddRequest()
         body.entityTypeId = 10001
+        body.code = "ET1"
 
         val postResponse = restTemplate.exchange(
             "/entity",
@@ -131,6 +132,7 @@ class EntityControllerTest {
     fun update() {
         val body = EntityUpdateRequest()
         body.id = 10001
+        body.code = "ET1"
         body.name = "new_name_updated"
         body.description = "new_description"
         val putResponse = restTemplate.exchange(

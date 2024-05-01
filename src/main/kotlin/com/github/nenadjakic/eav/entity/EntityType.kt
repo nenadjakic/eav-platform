@@ -8,6 +8,7 @@ import jakarta.persistence.Entity
     schema = "public",
     name = "entity_type",
     uniqueConstraints = [
+        UniqueConstraint(name = "uq_entity_type_code", columnNames = [ "code" ]),
         UniqueConstraint(name = "uq_entity_type_name", columnNames = [ "name" ])
     ])
 class EntityType : AbstractEntityId<Long>() {
@@ -17,6 +18,9 @@ class EntityType : AbstractEntityId<Long>() {
     @SequenceGenerator(name = "entity_type_id_seq", allocationSize = 1)
     @Column(name = "id")
     override var id: Long? = null
+
+    @Column(name = "code", nullable = false, unique = true, length = 25)
+    lateinit var code: String
 
     @Column(name = "name", nullable = false, unique = true, length = 100)
     lateinit var name: String

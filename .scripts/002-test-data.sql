@@ -13,17 +13,17 @@ VALUES ((SELECT id FROM "security"."user" WHERE username = 'admin@eav.eav'), (SE
 INSERT INTO "security"."user_role" (user_id, role_id)
 VALUES ((SELECT id FROM "security"."user" WHERE username = 'reader@eav.eav'), (SELECT id from "security"."role" WHERE "name" = 'READER'));
 
-INSERT INTO "public"."entity_type" (id, "name", "description") VALUES (nextval('public.entity_type_id_seq'), 'car', NULL);
-INSERT INTO "public"."entity_type" (id, "name", "description") VALUES (nextval('public.entity_type_id_seq'), 'book', NULL);
+INSERT INTO "public"."entity_type" (id, "code", "name", "description") VALUES (nextval('public.entity_type_id_seq'), 'C', 'car', NULL);
+INSERT INTO "public"."entity_type" (id, "code", "name", "description") VALUES (nextval('public.entity_type_id_seq'), 'B', 'book', NULL);
 
-INSERT INTO "public"."attribute" (id, description, "name", entity_type_id) VALUES(nextval('public.attribute_id_seq'), NULL, 'make', (SELECT id FROM "public"."entity_type" WHERE "name" = 'car'));
-INSERT INTO "public"."attribute" (id, description, "name", entity_type_id) VALUES(nextval('public.attribute_id_seq'), NULL, 'model', (SELECT id FROM "public"."entity_type" WHERE "name" = 'car'));
-INSERT INTO "public"."attribute" (id, description, "name", entity_type_id) VALUES(nextval('public.attribute_id_seq'), NULL, 'color', (SELECT id FROM "public"."entity_type" WHERE "name" = 'car'));
+INSERT INTO "public"."attribute" (id, code, description, "name", entity_type_id) VALUES(nextval('public.attribute_id_seq'), 'MAK', NULL, 'make', (SELECT id FROM "public"."entity_type" WHERE "name" = 'car'));
+INSERT INTO "public"."attribute" (id, code, description, "name", entity_type_id) VALUES(nextval('public.attribute_id_seq'), 'MOD', NULL, 'model', (SELECT id FROM "public"."entity_type" WHERE "name" = 'car'));
+INSERT INTO "public"."attribute" (id, code, description, "name", entity_type_id) VALUES(nextval('public.attribute_id_seq'), 'COL', NULL, 'color', (SELECT id FROM "public"."entity_type" WHERE "name" = 'car'));
 
-INSERT INTO "public"."attribute" (id, description, "name", entity_type_id) VALUES(nextval('public.attribute_id_seq'), NULL, 'isbn', (SELECT id FROM "public"."entity_type" WHERE "name" = 'book'));
-INSERT INTO "public"."attribute" (id, description, "name", entity_type_id) VALUES(nextval('public.attribute_id_seq'), NULL, 'author', (SELECT id FROM "public"."entity_type" WHERE "name" = 'book'));
-INSERT INTO "public"."attribute" (id, description, "name", entity_type_id) VALUES(nextval('public.attribute_id_seq'), NULL, 'title', (SELECT id FROM "public"."entity_type" WHERE "name" = 'book'));
-INSERT INTO "public"."attribute" (id, description, "name", entity_type_id) VALUES(nextval('public.attribute_id_seq'), NULL, 'publish_year', (SELECT id FROM "public"."entity_type" WHERE "name" = 'book'));
+INSERT INTO "public"."attribute" (id, code, description, "name", entity_type_id) VALUES(nextval('public.attribute_id_seq'), 'ISBN', NULL, 'isbn', (SELECT id FROM "public"."entity_type" WHERE "name" = 'book'));
+INSERT INTO "public"."attribute" (id, code, description, "name", entity_type_id) VALUES(nextval('public.attribute_id_seq'), 'AUT', NULL, 'author', (SELECT id FROM "public"."entity_type" WHERE "name" = 'book'));
+INSERT INTO "public"."attribute" (id, code, description, "name", entity_type_id) VALUES(nextval('public.attribute_id_seq'), 'TIT', NULL, 'title', (SELECT id FROM "public"."entity_type" WHERE "name" = 'book'));
+INSERT INTO "public"."attribute" (id, code, description, "name", entity_type_id) VALUES(nextval('public.attribute_id_seq'), 'PYE', NULL, 'publish_year', (SELECT id FROM "public"."entity_type" WHERE "name" = 'book'));
 
 INSERT INTO public.metadata (id, data_type, max_length, max_value, min_length, min_value, "repeatable", required, sub_attribute_ids)
 VALUES((SELECT id FROM "public"."attribute" WHERE "name" = 'make' AND entity_type_id =  (SELECT id FROM "public"."entity_type" WHERE "name" = 'car')), 'STRING', NULL, NULL, NULL, NULL, false, true, '[]'::jsonb);
@@ -60,7 +60,8 @@ VALUES('["READ", "CREATE", "UPDATE", "DELETE"]'::jsonb, (SELECT id FROM "public"
 INSERT INTO "security"."attribute_permission" (actions, attribute_id, role_id)
 VALUES('["READ", "CREATE", "DELETE"]'::jsonb, (SELECT id FROM "public"."attribute" WHERE "name" = 'color' AND entity_type_id =  (SELECT id FROM "public"."entity_type" WHERE "name" = 'car')), (SELECT id FROM "security"."role" WHERE "name" = 'ADMINISTRATOR'));
 
-INSERT INTO "public"."entity" (id, entity_type_id) VALUES (nextval('public.entity_id_seq'), (SELECT id FROM "public"."entity_type" WHERE "name" = 'car'));
+INSERT INTO "public"."entity" (id, entity_type_id, code, description)
+VALUES (nextval('public.entity_id_seq'), (SELECT id FROM "public"."entity_type" WHERE "name" = 'car'), 'C1', NULL);
 
 INSERT INTO "public"."attribute_value" (value, "position", attribute_id, entity_id)
 VALUES('Ford', NULL, (SELECT id FROM "public"."attribute" WHERE "name" = 'make' AND entity_type_id = (SELECT id FROM "public"."entity_type" WHERE "name" = 'car')), (SELECT id from "public"."entity" LIMIT 1));

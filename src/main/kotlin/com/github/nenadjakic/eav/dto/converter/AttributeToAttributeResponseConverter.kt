@@ -20,6 +20,7 @@ class AttributeToAttributeResponseConverter : AbstractConverter<Attribute, Attri
         )
         return AttributeResponse(
             source.id!!,
+            source.code,
             source.name,
             source.description,
             metadataResponse)

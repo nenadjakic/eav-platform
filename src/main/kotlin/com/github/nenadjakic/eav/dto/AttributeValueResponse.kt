@@ -2,11 +2,15 @@ package com.github.nenadjakic.eav.dto
 
 data class EntitySimpleResponse(
     val entityId: Long,
+    val code: String,
+    val description: String?
 )
 
 data class AttributeSimpleResponse(
     val attributeId: Long,
+    val code: String,
     val attributeName: String,
+    val description: String?
 )
 
 data class AttributeValueSimpleResponse(

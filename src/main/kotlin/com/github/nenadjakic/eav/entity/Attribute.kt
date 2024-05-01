@@ -12,6 +12,7 @@ import jakarta.persistence.Entity
     schema = "public",
     name = "attribute",
     uniqueConstraints = [
+        UniqueConstraint(name = "uq_attribute_code", columnNames = [ "code" ]),
         UniqueConstraint(name = "uq_attribute_entity_type_id_name", columnNames = ["entity_type_id", "name"])
     ])
 class Attribute : AbstractEntityId<Long>() {
@@ -24,6 +25,9 @@ class Attribute : AbstractEntityId<Long>() {
     @ManyToOne(optional = false)
     @JoinColumn(name = "entity_type_id", nullable = false, updatable = false)
     lateinit var entityType: EntityType
+
+    @Column(name = "code", nullable = false, unique = true, length = 25)
+    lateinit var code: String
 
     @Column(name = "name", nullable = false, unique = true, length = 100)
     lateinit var name: String
