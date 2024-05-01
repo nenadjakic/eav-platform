@@ -10,6 +10,10 @@ import jakarta.xml.bind.annotation.XmlRootElement
 @XmlRootElement(name="EntityTypeAddRequest")
 class EntityTypeAddRequest {
     @NotNull
+    @XmlElement(name = "Code")
+    lateinit var code: String
+
+    @NotNull
     @XmlElement(name = "Name")
     lateinit var name: String
 

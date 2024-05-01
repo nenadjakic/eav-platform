@@ -11,6 +11,7 @@ class AttributeAddRequestToAttributeConverter : AbstractConverter<AttributeAddRe
         val destination = Attribute()
         destination.entityType = EntityType()
         destination.entityType.id = source!!.entityTypeId!!
+        destination.code = source.code
         destination.name = source.name
         destination.description = source.description
 

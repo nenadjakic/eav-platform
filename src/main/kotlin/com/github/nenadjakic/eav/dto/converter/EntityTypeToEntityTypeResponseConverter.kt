@@ -11,6 +11,7 @@ class EntityTypeToEntityTypeResponseConverter : AbstractConverter<EntityType, En
         val attributeResponses: MutableList<AttributeResponse> = mutableListOf()
         source!!.attributes.forEach { attributeResponses.add(AttributeResponse(
             it.id!!,
+            it.code,
             it.name,
             it.description,
             MetadataResponse(
@@ -26,6 +27,7 @@ class EntityTypeToEntityTypeResponseConverter : AbstractConverter<EntityType, En
         )) }
         return EntityTypeResponse(
             source.id!!,
+            source.code,
             source.name,
             source.description,
             attributeResponses
