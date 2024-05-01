@@ -9,7 +9,14 @@ import java.time.OffsetDateTime
  * This class is mapped to the "user" table in the "security" schema.
  */
 @Entity
-@Table(schema = "security", name = "user")
+@Table(
+    schema = "security",
+    name = "user",
+    uniqueConstraints = [
+        UniqueConstraint(name = "uq_security_user_username", columnNames = [ "username" ]),
+        UniqueConstraint(name = "uq_security_user_email", columnNames = [ "email" ])
+    ]
+)
 class User : AbstractEntityId<Long>() {
 
     @Id
@@ -18,7 +25,7 @@ class User : AbstractEntityId<Long>() {
     @Column(name = "id")
     override var id: Long? = null
 
-    @Column(name = "username", unique = true, nullable = false, length = 200)
+    @Column(name = "username", unique = true, nullable = false, length = 500)
     lateinit var username: String
 
     @Column(name = "password", nullable = false, length = 200)

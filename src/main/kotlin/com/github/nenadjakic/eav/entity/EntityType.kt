@@ -4,9 +4,11 @@ import jakarta.persistence.*
 import jakarta.persistence.Entity
 
 @Entity
-@Table(schema = "public", name = "entity_type",
+@Table(
+    schema = "public",
+    name = "entity_type",
     uniqueConstraints = [
-        UniqueConstraint(name = "uq_entity_type_name", columnNames = ["name"])
+        UniqueConstraint(name = "uq_entity_type_name", columnNames = [ "name" ])
     ])
 class EntityType : AbstractEntityId<Long>() {
 

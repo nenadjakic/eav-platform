@@ -12,7 +12,12 @@ import java.util.*
  * for managing entities with a Long type ID.
  */
 @Entity
-@Table(schema = "security", name = "refresh_token")
+@Table(
+    schema = "security",
+    name = "refresh_token",
+    uniqueConstraints = [
+        UniqueConstraint(name = "uq_security_refresh_token_token", columnNames = [ "token" ])
+    ])
 class RefreshToken() : AbstractEntityId<Long>() {
 
     @Id
@@ -25,7 +30,7 @@ class RefreshToken() : AbstractEntityId<Long>() {
     @JoinColumn(name = "user_id", nullable = false)
     lateinit var user: User
 
-    @Column(name = "token", nullable = false, length = 100)
+    @Column(name = "token", nullable = false, length = 100, unique = true)
     lateinit var token: String
 
     @Column(name = "expire_at", nullable = false)

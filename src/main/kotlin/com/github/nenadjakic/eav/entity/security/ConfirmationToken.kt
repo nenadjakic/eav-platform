@@ -11,7 +11,13 @@ import java.util.*
  *
  */
 @Entity
-@Table(schema = "security", name = "confirmation_token")
+@Table(
+    schema = "security",
+    name = "confirmation_token",
+    uniqueConstraints = [
+        UniqueConstraint(name = "uq_security_confirmation_token_token", columnNames = [ "token" ])
+    ]
+)
 class ConfirmationToken() : AbstractEntityId<Long>() {
 
     @Id
@@ -23,7 +29,7 @@ class ConfirmationToken() : AbstractEntityId<Long>() {
     @JoinColumn(name = "id", nullable = false)
     lateinit var user: User
 
-    @Column(name = "token", nullable = false)
+    @Column(name = "token", nullable = false, length = 100, unique = true)
     lateinit var token: String
 
     @Column(name = "expire_at", nullable = false)

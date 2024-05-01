@@ -10,10 +10,12 @@
 
 ## Features (details)
 
-### JWT Authentication
+### Security: Authentication & Authorization
 - Uses JWT tokens for user authentication and authorization.
 - Implements refresh tokens to extend JWT validity without requiring reauthentication.
 - Provides enhanced security by reducing token exposure and improving session management.
+- Role-Based Access Control (RBAC)
+- Row-Level data protection
 #### Description
 - **_User Registration:_**
   - Users can register using their email and password.
@@ -24,7 +26,7 @@
 - **_User Login:_**
   - Users log in using their email (username) and password.
   - Upon successful authentication, the user receives a JWT access token and a refresh token.
-
+- **_Role-Based Access Control (RBAC) with attribute level permissions_**: TODO
 ### Data Management with Spring Data JPA
 - Data model is implemented using Spring JPA (Java Persistence API).
 - Repository interfaces extend `JpaRepository`, providing methods for common database operations.
@@ -32,4 +34,23 @@
 
 ## Requirements
 - **Java Development Kit (JDK):** While the project may work with JDK versions 21 or higher, it is recommended to use the latest stable version of JDK for optimal compatibility and performance.
-- **Gradle Build Tool:** is used for project management and dependency resolution.
+- **Gradle Build Tool** is used for project management and dependency resolution.
+
+## Build and Run
+1. Clone this repository:
+
+   `git clone https://github.com/nenadjakic/eav-platform.git`
+
+   `cd eav-platform`
+2. Create a new database for the project. `eav-platform` uses ORM (`Hibernate`) so you can choose any relational database engine 
+which is supported by `Hibernate` (e.g., MySQL, PostgreSQL, Oracle).
+3. Configure database connection:
+   - Open the `application.properties` file located in src/main/resources.
+   - Update the database connection settings (URL, username, password, dialect).
+4. Open a terminal and navigate to the project directory.
+5. Build the project using Gradle:
+
+   `./gradlew clean build`
+6. Run the project using Gradle:
+
+   `./gradlew bootRun`

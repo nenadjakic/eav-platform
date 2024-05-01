@@ -6,6 +6,7 @@ import jakarta.persistence.Entity
 import jakarta.persistence.Id
 import jakarta.persistence.ManyToMany
 import jakarta.persistence.Table
+import jakarta.persistence.UniqueConstraint
 
 /**
  * Represents a permission entity within the system.
@@ -14,13 +15,19 @@ import jakarta.persistence.Table
  *
  */
 @Entity
-@Table(schema = "security", name = "permission")
+@Table(
+    schema = "security",
+    name = "permission",
+    uniqueConstraints = [
+        UniqueConstraint(name = "security_permission_name", columnNames = [ "name" ])
+    ]
+)
 class Permission : AbstractEntityId<Long>() {
     @Id
     @Column(name = "id")
     override var id: Long? = null
 
-    @Column(name = "name", nullable = false, length = 100)
+    @Column(name = "name", nullable = false, length = 100, unique = true)
     lateinit var name: String
 
     @Column(name = "description", length = 10000)

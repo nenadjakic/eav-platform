@@ -5,14 +5,17 @@ import com.github.nenadjakic.eav.entity.EntityAttributeId
 import com.github.nenadjakic.eav.repository.AttributeValueRepository
 import com.github.nenadjakic.eav.service.model.Pager
 import org.springframework.data.domain.Page
+import org.springframework.security.access.prepost.PostFilter
 import org.springframework.stereotype.Service
 
 @Service
 open class AttributeValueService(
     val attributeValueRepository: AttributeValueRepository
 ) {
+
     open fun findById(entityId: Long, attributeId: Long): AttributeValue? = attributeValueRepository.findById(getEntityAttributeId(entityId, attributeId)).orElse(null)
 
+    @PostFilter(value = "@attributeSecurityService.canRead(filterObject.attribute.id)")
     open  fun findByEntityId(entityId: Long) : List<AttributeValue> = attributeValueRepository.findByEntityId(entityId)
 
     open fun findAll(): List<AttributeValue> {
