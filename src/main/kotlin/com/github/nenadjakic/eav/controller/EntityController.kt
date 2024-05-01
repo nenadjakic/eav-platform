@@ -14,6 +14,7 @@ import io.swagger.v3.oas.annotations.tags.Tag
 import org.modelmapper.ModelMapper
 import org.springframework.data.domain.Page
 import org.springframework.http.ResponseEntity
+import org.springframework.security.access.prepost.PreAuthorize
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder
@@ -91,6 +92,7 @@ class EntityController(
             ApiResponse(responseCode = "400", description = "Invalid request data.")
         ]
     )
+    @PreAuthorize("hasRole('ADMINISTRATOR')")
     open override fun create(model: EntityAddRequest): ResponseEntity<Void> {
         val entity = modelMapper.map(model, Entity::class.java)
         val createdEntity = entityService.create(entity)
@@ -114,6 +116,7 @@ class EntityController(
             ApiResponse(responseCode = "400", description = "Invalid request data.")
         ]
     )
+    @PreAuthorize("hasRole('ADMINISTRATOR')")
     open override fun update(model: EntityUpdateRequest): ResponseEntity<Void> {
         val entity = modelMapper.map(model, Entity::class.java)
         entityService.update(entity)
@@ -130,6 +133,7 @@ class EntityController(
             ApiResponse(responseCode = "204", description = "Entity deleted successfully")
         ]
     )
+    @PreAuthorize("hasRole('ADMINISTRATOR')")
     open override fun deleteById(id: Long): ResponseEntity<Void> {
         entityService.deleteById(id)
         return ResponseEntity.noContent().build()

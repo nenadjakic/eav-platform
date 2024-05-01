@@ -39,7 +39,7 @@ class EntityTypeControllerTest {
         val securityUser = SecurityUser()
         securityUser.username = "test"
         securityUser.addAuthority(SimpleGrantedAuthority("READER"))
-        securityUser.addAuthority(SimpleGrantedAuthority("WRITER"))
+        securityUser.addAuthority(SimpleGrantedAuthority("ADMINISTRATOR"))
         val token = jwtService.createToken(securityUser)
 
         headers = HttpHeaders()

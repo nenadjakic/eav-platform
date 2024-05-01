@@ -21,16 +21,16 @@ import org.springframework.web.bind.annotation.RequestBody
 @Validated
 interface EavWriteController<CR, UR> {
 
-    @PreAuthorize("hasRole('WRITER')")
+    //@PreAuthorize("hasRole('ADMINISTRATOR')")
     @PostMapping(consumes = [MediaType.APPLICATION_JSON_VALUE],
         produces = [MediaType.APPLICATION_JSON_VALUE])
     fun create(@Valid @RequestBody model:CR): ResponseEntity<Void>
 
-    @PreAuthorize("hasRole('WRITER')")
+    //@PreAuthorize("hasRole('ADMINISTRATOR')")
     @PutMapping(consumes = [MediaType.APPLICATION_JSON_VALUE])
     fun update(@Valid @RequestBody model:UR): ResponseEntity<Void>
 
-    @PreAuthorize("hasRole('WRITER')")
+    //@PreAuthorize("hasRole('ADMINISTRATOR')")
     @DeleteMapping("/{id}")
     fun deleteById(@PathVariable id: Long): ResponseEntity<Void>
 }
