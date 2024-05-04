@@ -71,6 +71,7 @@ open class EntityTypeController(
     open override fun findById(id: Long): ResponseEntity<EntityTypeResponse> {
         val entityType = entityTypeService.findById(id)
         val response = if (entityType != null) modelMapper.map(entityType, EntityTypeResponse::class.java) else null
+
         return ResponseEntity.ofNullable(response)
     }
 
