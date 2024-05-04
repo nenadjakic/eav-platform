@@ -29,6 +29,9 @@ class EntityType : AbstractEntityId<Long>() {
     var description: String? = null
 
     @OneToMany(mappedBy = "entityType")
+    lateinit var entities: MutableList<com.github.nenadjakic.eav.entity.Entity>
+
+    @OneToMany(mappedBy = "entityType")
     private val _attributes: MutableSet<Attribute> = mutableSetOf()
 
     var attributes: Set<Attribute>

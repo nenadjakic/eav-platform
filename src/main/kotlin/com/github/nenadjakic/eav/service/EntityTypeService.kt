@@ -23,4 +23,6 @@ open class EntityTypeService(
     open override fun update(entity: EntityType): EntityType = entityTypeRepository.save(entity)
 
     open override fun create(entity: EntityType): EntityType = entityTypeRepository.save(entity)
+
+    fun existsByEntityIdAndAttributeId(entityId: Long, attributeId: Long): Boolean = entityTypeRepository.existsByEntityIdAndAttributeId(entityId, attributeId)
 }

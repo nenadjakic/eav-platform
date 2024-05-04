@@ -39,7 +39,7 @@ class EavExceptionHandler : ResponseEntityExceptionHandler() {
         val errors = ex.bindingResult
             .fieldErrors
             .stream()
-            .map { obj: FieldError -> obj.defaultMessage }
+            .map { obj: FieldError -> obj.field + ":" + obj.defaultMessage }
             .collect(Collectors.toList())
 
         val path = (request as ServletWebRequest).request.requestURI
@@ -56,7 +56,7 @@ class EavExceptionHandler : ResponseEntityExceptionHandler() {
     @ExceptionHandler(ConstraintViolationException::class)
     open fun handleConstraintViolationException(ex: ConstraintViolationException, request: WebRequest?): ResponseEntity<ErrorInfo> {
         logger.error("Error occurred.", ex)
-        return getErrorInfoResponseEntity(HttpStatus.INTERNAL_SERVER_ERROR, ex, request as ServletWebRequest)
+        return getErrorInfoResponseEntity(HttpStatus.BAD_REQUEST, ex, request as ServletWebRequest)
     }
 
     private fun getErrorInfoResponseEntity(

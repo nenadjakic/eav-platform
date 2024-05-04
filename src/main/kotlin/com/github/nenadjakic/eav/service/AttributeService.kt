@@ -8,6 +8,9 @@ import org.springframework.stereotype.Service
 
 @Service
 open class AttributeService(private val attributeRepository: AttributeRepository): EavService<Attribute> {
+
+    open fun existsById(id: Long): Boolean = attributeRepository.existsById(id)
+
     open override fun findById(id: Long): Attribute? = attributeRepository.findById(id).orElse(null)
 
     open override fun findAll(): List<Attribute> = attributeRepository.findAll()

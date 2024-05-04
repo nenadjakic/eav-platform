@@ -16,16 +16,16 @@ import org.springframework.web.bind.annotation.RequestParam
  */
 interface EavReadController<RE> {
 
-    @PreAuthorize("hasRole('READER')")
+    //@PreAuthorize("hasRole('READER')")
     //@PostAuthorize("@attributeSecurityService.canRead(1L)")
     @GetMapping(produces = [MediaType.APPLICATION_JSON_VALUE])
     fun findAll(): ResponseEntity<List<RE>>
 
-    @PreAuthorize("hasRole('READER')")
+    //@PreAuthorize("hasRole('READER')")
     @GetMapping(value = ["/page"], produces = [MediaType.APPLICATION_JSON_VALUE])
     fun findPage(@RequestParam pageNumber: Int, @RequestParam(required = false) pageSize: Int?): ResponseEntity<Page<RE>>
 
-    @PreAuthorize("hasRole('READER')")
+    //@PreAuthorize("hasRole('READER')")
     @GetMapping(value = ["/{id}"], produces = [MediaType.APPLICATION_JSON_VALUE])
     fun findById(@PathVariable id: Long): ResponseEntity<RE>
 }
