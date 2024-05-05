@@ -1,0 +1,42 @@
+version: '3.8'
+services:
+  eav-platform-database:
+    image: postgres:16.1
+    container_name: eav-platform-database
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: eav-platform
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    logging:
+      options:
+        max-size: 10m
+        max-file: "5"
+    ports:
+      - "9432:5432"
+    networks:
+      - eav-platform-network
+    volumes:
+      - eav-platform-data:/var/lib/postgresql/data
+      - ./.scripts/001-init-db-schema.sql:/docker-entrypoint-initdb.d/init.sql
+
+  eav-platform:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: eav-platform-app
+    depends_on:
+      - eav-platform-database
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://eav-platform-database:5432/eav-platform
+      SPRING_DATASOURCE_USERNAME: postgres
+      SPRING_DATASOURCE_PASSWORD: postgres
+    ports:
+      - "9090:8080"
+    networks:
+      - eav-platform-network
+
+volumes:
+  eav-platform-data:
+networks:
+  eav-platform-network:
