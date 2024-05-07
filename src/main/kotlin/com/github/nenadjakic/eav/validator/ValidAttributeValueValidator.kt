@@ -23,8 +23,10 @@ class ValidAttributeValueValidator(
 
         val attribute = attributeService.findById(value.attributeId!!);
         if (attribute != null) {
+            val metadata = attribute.metadata
+
             value.value?.let {
-                if (null == when (attribute.metadata.dataType) {
+                val convertedValue: Any? = when (attribute.metadata.dataType) {
                     DataType.INTEGER -> it.toIntOrNull()
                     DataType.BOOLEAN -> it.toBooleanStrictOrNull()
                     DataType.DECIMAL -> it.toFloatOrNull()
@@ -56,13 +58,76 @@ class ValidAttributeValueValidator(
                     }
 
                     else -> 100
-                }) {
+                }
+
+                if (null == convertedValue) {
                     context!!.disableDefaultConstraintViolation()
                     context.buildConstraintViolationWithTemplate("{validAttributeValue}")
                         .addPropertyNode("value")
                         .addConstraintViolation()
 
                     return false
+                }
+
+                return when (metadata.dataType) {
+                    DataType.INTEGER -> {
+                        var result = true
+                        if (metadata.minValue != null && (convertedValue!! as Int) < (metadata.minValue!! as Int)) {
+                            context!!.disableDefaultConstraintViolation()
+                            context.buildConstraintViolationWithTemplate("{minValue}")
+                                .addPropertyNode("value")
+                                .addConstraintViolation()
+                            result = false
+                        }
+                        if (metadata.maxValue != null && (convertedValue!! as Int) > (metadata.maxValue!! as Int)) {
+                            context!!.disableDefaultConstraintViolation()
+                            context.buildConstraintViolationWithTemplate("{maxValue}")
+                                .addPropertyNode("value")
+                                .addConstraintViolation()
+                            result = false
+                        }
+
+                        result
+                    }
+                    DataType.DECIMAL -> {
+                        var result = true
+                        if (metadata.minValue != null && (convertedValue!! as Float) < (metadata.minValue!! as Float)) {
+                            context!!.disableDefaultConstraintViolation()
+                            context.buildConstraintViolationWithTemplate("{minValue}")
+                                .addPropertyNode("value")
+                                .addConstraintViolation()
+                            result = false
+                        }
+                        if (metadata.maxValue != null && (convertedValue!! as Float) > (metadata.maxValue!! as Float)) {
+                            context!!.disableDefaultConstraintViolation()
+                            context.buildConstraintViolationWithTemplate("{maxValue}")
+                                .addPropertyNode("value")
+                                .addConstraintViolation()
+                            result = false
+                        }
+
+                        result
+                    }
+                    DataType.STRING -> {
+                        var result = true
+                        if (metadata.minLength != null && (convertedValue!! as String).length < metadata.minLength!!) {
+                            context!!.disableDefaultConstraintViolation()
+                            context.buildConstraintViolationWithTemplate("{minLengthValue}")
+                                .addPropertyNode("value")
+                                .addConstraintViolation()
+                            result = false
+                        }
+                        if (metadata.maxLength != null && (convertedValue!! as String).length > metadata.maxLength!!) {
+                            context!!.disableDefaultConstraintViolation()
+                            context.buildConstraintViolationWithTemplate("{maxLengthValue}")
+                                .addPropertyNode("value")
+                                .addConstraintViolation()
+                            result = false
+                        }
+
+                        result
+                    }
+                    else -> true
                 }
             }
         }
